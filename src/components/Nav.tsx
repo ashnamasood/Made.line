@@ -13,7 +13,7 @@ export function Nav() {
   // Inset to the same gutter as the hero card, and it scrolls away rather than sticking.
   return (
     <header className="px-2 pt-2 md:px-[2vw] md:pt-[1.5vw]">
-      <nav className="flex items-center justify-between gap-6 bg-peri px-5 py-3 md:px-10">
+      <nav className="flex items-center justify-between gap-6 bg-peri px-5 py-3 md:pl-4 md:pr-10">
         <Link href="/" aria-label="MADE.line home">
           <Wordmark className="h-6 md:h-8" priority />
         </Link>

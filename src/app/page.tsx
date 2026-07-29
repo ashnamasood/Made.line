@@ -39,7 +39,7 @@ export default function Home() {
           <Monogram className="absolute right-6 top-5 h-9 md:right-12 md:top-8 md:h-14" />
           <Link
             href="/shop"
-            className="absolute bottom-8 left-6 rounded-full border-2 border-white px-8 py-3 text-sm font-black uppercase tracking-wide text-white hover:bg-white hover:text-ink md:bottom-14 md:left-12"
+            className="absolute bottom-8 left-6 rounded-full border-2 border-white px-8 py-3 text-sm font-black uppercase tracking-wide text-white hover:bg-white hover:text-ink md:bottom-14 md:left-12 md:px-12 md:py-6 md:text-[1.2vw]"
           >
             Shop Products
           </Link>
@@ -67,11 +67,13 @@ export default function Home() {
                 />
               </div>
               <div
-                className={`bg-ink px-8 py-14 text-center text-4xl text-cream md:py-16 md:text-5xl ${
+                className={`bg-ink px-8 py-14 text-center text-4xl text-cream md:py-16 md:text-[3.6vw] ${
                   divider ? "md:border-r-[3px] md:border-cream" : ""
                 }`}
               >
-                <span className="font-display">MADE.</span>
+                {/* The band's dot is square, unlike the round one in the logo. */}
+                <span className="font-display">MADE</span>
+                <span className="mx-[0.05em] inline-block size-[0.17em] bg-current" />
                 <span className="font-script">{p.name}</span>
               </div>
             </Link>
