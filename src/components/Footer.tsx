@@ -18,8 +18,9 @@ const social = [
 
 export function Footer() {
   return (
-    <footer className="bg-cream px-6 pb-14 pt-20 md:px-10">
-      <div className="mx-auto max-w-[1600px]">
+    // Rounded card in the same gutter as the nav and hero.
+    <footer className="p-2 md:px-[2vw] md:pb-[2vw]">
+      <div className="rounded-2xl bg-cream px-6 pb-14 pt-20 md:px-10">
         <Wordmark className="h-[14vw] max-h-[220px]" />
 
         <div className="mt-16 flex flex-wrap gap-16 text-lg font-extrabold md:gap-[13%] md:text-[1.9vw]">

@@ -18,8 +18,10 @@ export default function Contact() {
   const [sent, setSent] = useState(false);
 
   return (
-    <div className="bg-cream px-6 py-20 md:px-10 md:py-28">
-      <div className="mx-auto max-w-[760px]">
+    // Sits in a rounded card inset from the page edge, like the hero.
+    <div className="p-2 md:px-[2vw] md:py-[1vw]">
+      <div className="rounded-2xl bg-cream px-6 py-20 md:px-10 md:py-28">
+        <div className="mx-auto max-w-[760px]">
         <h1 className="text-5xl font-black md:text-6xl">contact us</h1>
 
         <div className="mt-8 space-y-5 text-lg leading-relaxed">
@@ -104,6 +106,7 @@ export default function Contact() {
             </button>
           </form>
         )}
+        </div>
       </div>
     </div>
   );
