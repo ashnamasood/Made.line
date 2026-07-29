@@ -16,6 +16,8 @@ const field =
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
   return (
     // Sits in a rounded card inset from the page edge, like the hero.
@@ -39,16 +41,31 @@ export default function Contact() {
 
         {sent ? (
           <p className="mt-12 rounded-xl bg-white px-6 py-8 text-lg font-bold">
-            Thanks — your message is ready to send. Nothing was delivered yet:
-            this form has no backend behind it so far.
+            Thanks — we&apos;ve got your message and will be in touch within 2
+            business days.
           </p>
         ) : (
           <form
             className="mt-12 space-y-4"
-            onSubmit={(e) => {
-              // ponytail: no backend yet — POST to an API route once one exists.
+            onSubmit={async (e) => {
               e.preventDefault();
-              setSent(true);
+              setError("");
+              setSending(true);
+              const body = Object.fromEntries(
+                new FormData(e.currentTarget).entries(),
+              );
+              const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+              }).catch(() => null);
+              setSending(false);
+              if (res?.ok) setSent(true);
+              else
+                setError(
+                  (await res?.json().catch(() => null))?.error ??
+                    "Something went wrong. Please try again.",
+                );
             }}
           >
             <input
@@ -85,24 +102,18 @@ export default function Contact() {
               required
             />
 
-            <div className="pt-4">
-              <p className="mb-3 text-sm text-ink/70">
-                Optional: 10 files max, total file size under 50MB
+            {error && (
+              <p className="rounded-xl bg-white px-6 py-4 font-bold text-red-700">
+                {error}
               </p>
-              <input
-                className={`${field} file:mr-4 file:rounded-full file:border-0 file:bg-ink file:px-5 file:py-2 file:text-sm file:font-bold file:text-cream`}
-                type="file"
-                name="files"
-                multiple
-                accept="image/*"
-              />
-            </div>
+            )}
 
             <button
-              className="mt-6 w-full rounded-full border-2 border-ink py-5 text-base font-black uppercase tracking-[0.15em] hover:bg-ink hover:text-cream"
+              className="mt-6 w-full rounded-full border-2 border-ink py-5 text-base font-black uppercase tracking-[0.15em] hover:bg-ink hover:text-cream disabled:opacity-50"
               type="submit"
+              disabled={sending}
             >
-              Submit
+              {sending ? "Sending…" : "Submit"}
             </button>
           </form>
         )}

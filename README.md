@@ -7,6 +7,19 @@ pnpm install
 pnpm dev
 ```
 
+## Contact form
+
+`POST /api/contact` validates the payload and inserts into a Postgres table
+`contact_messages`, created on first request. Set `DATABASE_URL` (see
+`.env.example`) locally in `.env.local` and in the Vercel project settings —
+without it the route returns 500 and the form shows an error.
+
+Read the messages with:
+
+```sql
+SELECT * FROM contact_messages ORDER BY created_at DESC;
+```
+
 ## Assets
 
 `public/video/hero.mp4` is a web cut of the source clip — 12s, 1012x1920, 13MB.
