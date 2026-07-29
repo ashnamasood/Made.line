@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Archivo_Black, Playfair_Display } from "next/font/google";
+import { Archivo_Black, Montserrat, Playfair_Display } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
@@ -15,10 +15,10 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
-// Same family as the wordmark's Archivo Black, so body copy matches the logo.
-const archivoSans = Archivo({
+// Geometric grotesque matching the design's nav, headline and claim type.
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-archivo",
+  variable: "--font-montserrat",
 });
 
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${playfair.variable} ${archivoSans.variable} h-full antialiased`}
+      className={`${archivo.variable} ${playfair.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <Nav />
