@@ -68,6 +68,13 @@ export async function POST(request: Request) {
     return Response.json({ error: result }, { status: 400 });
   }
 
+  if (!process.env.DATABASE_URL) {
+    return Response.json(
+      { error: "The contact form is not connected to a database yet." },
+      { status: 503 },
+    );
+  }
+
   try {
     await ensureTable();
     await db()`
