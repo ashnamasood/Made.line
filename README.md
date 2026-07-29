@@ -7,14 +7,14 @@ npm install
 npm run dev
 ```
 
-## Assets not in the repo
+## Assets
 
-`/public/video` is gitignored (the source clip is 97MB). Drop the hero clip at
-`public/video/hero.mp4` — the home page hero expects it there. Compress before
-deploying:
+`public/video/hero.mp4` is a web cut of the source clip — 12s, 1012x1920, 13MB.
+The 97MB original lives in `_assets/` (gitignored). To recut it:
 
 ```bash
-ffmpeg -i hero.mp4 -vf scale=-2:1080 -crf 28 hero-web.mp4
+avconvert -s _assets/hero-source.mp4 -o public/video/hero.mp4 \
+  -p Preset1920x1080 --duration 12 --replace
 ```
 
 Still placeholders (dashed `Slot` boxes in `src/app/page.tsx`):

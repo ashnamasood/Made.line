@@ -40,5 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# large media — kept out of history, see README
-/public/video
+# uncompressed source media — the web-sized cut lives in /public/video
+/_assets
