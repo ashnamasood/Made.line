@@ -51,9 +51,18 @@ export default function Contact() {
               e.preventDefault();
               setError("");
               setSending(true);
-              const body = Object.fromEntries(
-                new FormData(e.currentTarget).entries(),
-              );
+              const data = new FormData(e.currentTarget);
+              // ponytail: filenames only — storing the bytes needs blob storage.
+              const attachments = data
+                .getAll("files")
+                .filter((f): f is File => f instanceof File && f.size > 0)
+                .map((f) => f.name)
+                .join(", ");
+              data.delete("files");
+              const body = {
+                ...Object.fromEntries(data.entries()),
+                attachments,
+              };
               const res = await fetch("/api/contact", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -101,6 +110,19 @@ export default function Contact() {
               placeholder="Tell us the details.*"
               required
             />
+
+            <div className="pt-4">
+              <p className="mb-3 text-sm text-ink/70">
+                Optional: 10 files max, total file size under 50MB
+              </p>
+              <input
+                className={`${field} file:mr-4 file:rounded-full file:border-0 file:bg-ink file:px-5 file:py-2 file:text-sm file:font-bold file:text-cream`}
+                type="file"
+                name="files"
+                multiple
+                accept="image/*"
+              />
+            </div>
 
             {error && (
               <p className="rounded-xl bg-white px-6 py-4 font-bold text-red-700">

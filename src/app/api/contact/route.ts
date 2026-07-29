@@ -30,6 +30,7 @@ function ensureTable() {
       reason     text        NOT NULL,
       topic      text        NOT NULL,
       details    text        NOT NULL,
+      attachments text,
       created_at timestamptz NOT NULL DEFAULT now()
     )`;
   return ready;
@@ -45,6 +46,12 @@ function clean(body: Record<string, unknown>) {
     out[key] = value.trim();
   }
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(out.email)) return "email is invalid";
+
+  const { attachments } = body;
+  if (typeof attachments === "string") {
+    if (attachments.length > 2000) return "too many attachments";
+    out.attachments = attachments;
+  }
   return out;
 }
 
@@ -64,9 +71,9 @@ export async function POST(request: Request) {
   try {
     await ensureTable();
     await db()`
-      INSERT INTO contact_messages (name, email, reason, topic, details)
+      INSERT INTO contact_messages (name, email, reason, topic, details, attachments)
       VALUES (${result.name}, ${result.email}, ${result.reason},
-              ${result.topic}, ${result.details})`;
+              ${result.topic}, ${result.details}, ${result.attachments ?? null})`;
   } catch (error) {
     console.error("contact insert failed", error);
     return Response.json({ error: "Could not save message" }, { status: 500 });
