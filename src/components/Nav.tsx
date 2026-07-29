@@ -14,7 +14,7 @@ export function Nav() {
     <header className="sticky top-0 z-50 bg-peri">
       <nav className="mx-auto flex max-w-[1600px] items-center justify-between gap-6 px-6 py-4 md:px-10">
         <Link href="/" aria-label="MADE.line home">
-          <Wordmark className="text-2xl md:text-3xl" />
+          <Wordmark className="h-6 md:h-8" priority />
         </Link>
         <ul className="hidden items-center gap-8 text-sm font-bold uppercase tracking-wide md:flex lg:gap-14 lg:text-base">
           {links.map(([label, href]) => (

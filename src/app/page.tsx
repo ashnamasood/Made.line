@@ -35,7 +35,7 @@ export default function Home() {
             playsInline
             preload="metadata"
           />
-          <Monogram className="absolute right-6 top-4 text-5xl md:right-12 md:top-8 md:text-7xl" />
+          <Monogram className="absolute right-6 top-5 h-9 md:right-12 md:top-8 md:h-14" />
           <Link
             href="/shop"
             className="absolute bottom-8 left-6 rounded-full border-2 border-white px-8 py-3 text-sm font-bold uppercase tracking-wide text-white hover:bg-white hover:text-ink md:bottom-14 md:left-12"

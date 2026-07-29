@@ -22,6 +22,6 @@ Still placeholders (dashed `Slot` boxes in `src/app/page.tsx`):
 - 3 product shots → `public/products/`
 - 1 lifestyle image → `public/images/`
 
-The wordmark in `src/components/Logo.tsx` is set in type (Archivo Black +
-Playfair Display) as a stand-in. Drop the real files in `public/logos/` and
-swap the component body — the replacement line is in the comment.
+`public/logos/wordmark.png` and `monogram.png` are the supplied brand PNGs
+cropped to their artwork (the originals in `_assets/` are 1920x1080 with the
+logo floating in transparent padding, so they can't be sized by CSS as-is).

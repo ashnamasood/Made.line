@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo_Black, Inter, Playfair_Display } from "next/font/google";
+import { Archivo, Archivo_Black, Playfair_Display } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
@@ -15,9 +15,10 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
-const inter = Inter({
+// Same family as the wordmark's Archivo Black, so body copy matches the logo.
+const archivoSans = Archivo({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-archivo",
 });
 
 export const metadata: Metadata = {
@@ -33,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${playfair.variable} ${inter.variable} h-full antialiased`}
+      className={`${archivo.variable} ${playfair.variable} ${archivoSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <Nav />

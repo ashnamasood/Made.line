@@ -40,5 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# uncompressed source media — the web-sized cut lives in /public/video
-/_assets
+# uncompressed source video — the web-sized cut lives in /public/video
+/_assets/*.mp4

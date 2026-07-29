@@ -1,18 +1,34 @@
-/**
- * Wordmark. Type-based stand-in for the supplied brand files.
- * Swap for the real asset by replacing the body with:
- *   <Image src="/logos/wordmark.svg" alt="MADE.line" width={180} height={40} priority />
- */
-export function Wordmark({ className = "" }: { className?: string }) {
+import Image from "next/image";
+
+/** MADE.line wordmark. Size it with a height class; width follows. */
+export function Wordmark({
+  className = "",
+  priority = false,
+}: {
+  className?: string;
+  priority?: boolean;
+}) {
   return (
-    <span className={`inline-flex items-baseline leading-none ${className}`}>
-      <span className="font-display tracking-tight">MADE.</span>
-      <span className="font-script font-normal">line</span>
-    </span>
+    <Image
+      src="/logos/wordmark.png"
+      alt="MADE.line"
+      width={917}
+      height={150}
+      priority={priority}
+      className={`w-auto ${className}`}
+    />
   );
 }
 
-/** The "M." monogram mark. */
+/** The "M." monogram. */
 export function Monogram({ className = "" }: { className?: string }) {
-  return <span className={`font-display leading-none ${className}`}>M.</span>;
+  return (
+    <Image
+      src="/logos/monogram.png"
+      alt=""
+      width={266}
+      height={179}
+      className={`w-auto ${className}`}
+    />
+  );
 }
