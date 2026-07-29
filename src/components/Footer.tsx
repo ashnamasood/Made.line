@@ -20,7 +20,7 @@ export function Footer() {
   return (
     <footer className="bg-cream px-6 pb-14 pt-20 md:px-10">
       <div className="mx-auto max-w-[1600px]">
-        <Wordmark className="h-auto w-[93%]" />
+        <Wordmark className="h-[14vw] max-h-[220px]" />
 
         <div className="mt-16 flex flex-wrap gap-16 text-lg font-extrabold md:gap-[13%] md:text-[1.9vw]">
           <div>
