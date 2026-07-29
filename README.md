@@ -3,8 +3,8 @@
 Next.js (App Router) + Tailwind v4 frontend.
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ## Assets
