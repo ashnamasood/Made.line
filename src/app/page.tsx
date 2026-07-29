@@ -39,7 +39,7 @@ export default function Home() {
           <Monogram className="absolute right-6 top-5 h-9 md:right-12 md:top-8 md:h-14" />
           <Link
             href="/shop"
-            className="absolute bottom-8 left-6 rounded-full border-2 border-white px-8 py-3 text-sm font-black uppercase tracking-wide text-white hover:bg-white hover:text-ink md:bottom-14 md:left-12 md:px-12 md:py-6 md:text-[1.2vw]"
+            className="absolute bottom-8 left-6 rounded-full border-2 border-white px-8 py-3 text-sm font-black uppercase tracking-[0.15em] text-white hover:bg-white hover:text-ink md:bottom-14 md:left-12 md:border-4 md:px-9 md:py-3 md:text-[0.95vw]"
           >
             Shop Products
           </Link>
