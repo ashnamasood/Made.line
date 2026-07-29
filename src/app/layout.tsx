@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo_Black, Montserrat, Playfair_Display } from "next/font/google";
+import { Archivo_Black, Inter, Playfair_Display } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
@@ -15,10 +15,11 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
-// Geometric grotesque matching the design's nav, headline and claim type.
-const montserrat = Montserrat({
+// Stand-in for the design's Alte Haas Grotesk Bold — same neo-grotesk family
+// of shapes. Replace with next/font/local once the real file is in src/fonts.
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -34,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${playfair.variable} ${montserrat.variable} h-full antialiased`}
+      className={`${archivo.variable} ${playfair.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <Nav />
