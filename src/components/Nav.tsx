@@ -16,7 +16,7 @@ export function Nav() {
         <Link href="/" aria-label="MADE.line home">
           <Wordmark className="h-6 md:h-8" priority />
         </Link>
-        <ul className="hidden items-center gap-8 text-sm font-bold uppercase tracking-wide md:flex lg:gap-14 lg:text-base">
+        <ul className="hidden items-center gap-8 text-sm font-extrabold uppercase tracking-wide md:flex lg:gap-14 lg:text-base">
           {links.map(([label, href]) => (
             <li key={href}>
               <Link href={href} className="hover:opacity-60">
@@ -26,10 +26,10 @@ export function Nav() {
           ))}
         </ul>
         <details className="relative md:hidden">
-          <summary className="cursor-pointer list-none text-sm font-bold uppercase">
+          <summary className="cursor-pointer list-none text-sm font-extrabold uppercase">
             Menu
           </summary>
-          <ul className="absolute right-0 mt-3 w-44 space-y-3 bg-peri p-4 text-sm font-bold uppercase shadow-lg">
+          <ul className="absolute right-0 mt-3 w-44 space-y-3 bg-peri p-4 text-sm font-extrabold uppercase shadow-lg">
             {links.map(([label, href]) => (
               <li key={href}>
                 <Link href={href}>{label}</Link>

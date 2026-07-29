@@ -22,7 +22,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1600px]">
         <Wordmark className="h-[14vw] max-h-[220px]" />
 
-        <div className="mt-16 flex flex-wrap gap-16 text-lg font-bold md:gap-32">
+        <div className="mt-16 flex flex-wrap gap-16 text-lg font-extrabold md:gap-32">
           <div>
             <h2 className="mb-6 uppercase">Navigate</h2>
             <ul className="space-y-1">

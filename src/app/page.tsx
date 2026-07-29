@@ -38,11 +38,11 @@ export default function Home() {
           <Monogram className="absolute right-6 top-5 h-9 md:right-12 md:top-8 md:h-14" />
           <Link
             href="/shop"
-            className="absolute bottom-8 left-6 rounded-full border-2 border-white px-8 py-3 text-sm font-bold uppercase tracking-wide text-white hover:bg-white hover:text-ink md:bottom-14 md:left-12"
+            className="absolute bottom-8 left-6 rounded-full border-2 border-white px-8 py-3 text-sm font-extrabold uppercase tracking-wide text-white hover:bg-white hover:text-ink md:bottom-14 md:left-12"
           >
             Shop Products
           </Link>
-          <h1 className="absolute bottom-24 right-6 max-w-[14ch] text-right text-3xl font-bold leading-tight md:bottom-14 md:right-12 md:max-w-none md:text-5xl">
+          <h1 className="absolute bottom-24 right-6 max-w-[14ch] text-right text-3xl font-extrabold leading-tight md:bottom-14 md:right-12 md:max-w-none md:text-5xl">
             Created for effortless touchups anytime.
           </h1>
         </div>
@@ -73,7 +73,7 @@ export default function Home() {
           {claims.map((c) => (
             <p
               key={c}
-              className="border-t border-ink px-6 py-6 text-xl font-bold last:border-b md:px-10 md:text-3xl"
+              className="border-t border-ink px-6 py-6 text-xl font-extrabold last:border-b md:px-10 md:text-3xl"
             >
               {c}
             </p>
