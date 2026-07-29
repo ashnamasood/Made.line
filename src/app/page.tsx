@@ -19,8 +19,8 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className="p-2 md:p-3">
-        {/* Card fills the screen below the nav (nav + section padding ≈ 6rem) instead of running past the fold. */}
-        <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-blush md:aspect-auto md:h-[calc(100svh-6rem)]">
+        {/* Card fills the screen below the nav (nav bar + the three gutters ≈ 5.75rem). */}
+        <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-blush md:aspect-auto md:h-[calc(100svh-5.75rem)]">
           {/*
             Source is 2160x4096 (vertical). Full-bleed cover in a landscape frame always crops;
             the 3/2 frame keeps that crop as low as it can go while staying wide, and the Y offset

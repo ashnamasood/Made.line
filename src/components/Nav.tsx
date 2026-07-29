@@ -11,8 +11,9 @@ const links = [
 
 export function Nav() {
   return (
-    <header className="sticky top-0 z-50 bg-peri">
-      <nav className="mx-auto flex max-w-[1600px] items-center justify-between gap-6 px-6 py-4 md:px-10">
+    {/* Inset to the same gutter as the hero card, and it scrolls away rather than sticking. */}
+    <header className="p-2 pb-0 md:p-3 md:pb-0">
+      <nav className="flex items-center justify-between gap-6 bg-peri px-5 py-3 md:px-8">
         <Link href="/" aria-label="MADE.line home">
           <Wordmark className="h-6 md:h-8" priority />
         </Link>
