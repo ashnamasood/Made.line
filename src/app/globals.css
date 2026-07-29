@@ -14,7 +14,8 @@
 }
 
 body {
-  background: var(--color-cream);
+  /* White page; the cream is only used by specific sections. */
+  background: #fff;
   color: var(--color-ink);
   font-family: var(--font-sans);
 }

@@ -79,7 +79,7 @@ export default function Home() {
       </section>
 
       {/* Claims */}
-      <section className="grid md:grid-cols-2">
+      <section className="grid bg-cream md:grid-cols-2">
         {/* Rules run to the section edge; only the text is inset. The stack sits
             off the bottom, as in the design. */}
         <div className="flex flex-col justify-end pb-[10%]">
