@@ -39,11 +39,12 @@ export default function Home() {
           <Monogram className="absolute right-6 top-5 h-9 md:right-12 md:top-8 md:h-14" />
           <Link
             href="/shop"
-            className="absolute bottom-8 left-6 rounded-full border-2 border-white px-8 py-3 text-sm font-extrabold uppercase tracking-wide text-white hover:bg-white hover:text-ink md:bottom-14 md:left-12"
+            className="absolute bottom-8 left-6 rounded-full border-2 border-white px-8 py-3 text-sm font-black uppercase tracking-wide text-white hover:bg-white hover:text-ink md:bottom-14 md:left-12"
           >
             Shop Products
           </Link>
-          <h1 className="absolute bottom-24 right-6 max-w-[14ch] text-right text-3xl font-extrabold leading-tight md:bottom-14 md:right-12 md:max-w-none md:text-5xl">
+          {/* Sized off the viewport so it holds the design's proportion to the card. */}
+          <h1 className="absolute bottom-24 right-6 max-w-[14ch] text-right text-3xl font-extrabold leading-tight md:bottom-14 md:right-12 md:max-w-none md:text-[2.2vw]">
             Created for effortless touchups anytime.
           </h1>
         </div>
