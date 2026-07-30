@@ -35,6 +35,18 @@ down onto their own background so the bottle sits about half the panel
 height, as in the design. `public/images/comb.jpg` is the lifestyle shot.
 Originals are in `_assets/`.
 
+## Fonts
+
+`src/fonts/` holds the design's own faces, wired via `next/font/local`:
+TT Commons Pro Black for `MADE.` and Catchye for the script half. **Both are
+demo cuts, licensed for personal use only** — buy a licence before launch
+(Catchye: https://mjtype.com/product/catchye/).
+
+Body and UI text is Inter, standing in for the design's Alte Haas Grotesk
+Bold, which wasn't supplied. Drop that file in `src/fonts/` to finish the set.
+
+## Logos
+
 `public/logos/wordmark.png` and `monogram.png` are the supplied brand PNGs
 cropped to their artwork (the originals in `_assets/` are 1920x1080 with the
 logo floating in transparent padding, so they can't be sized by CSS as-is).

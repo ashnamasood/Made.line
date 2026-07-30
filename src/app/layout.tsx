@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
-import { Archivo_Black, Inter, Playfair_Display } from "next/font/google";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
 
-const archivo = Archivo_Black({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-archivo-black",
+// The design's own faces: TT Commons Pro Black sets "MADE." and Catchye the
+// script half. Both are demo cuts — licence them before a commercial launch.
+const ttCommons = localFont({
+  src: "../fonts/TTCommonsPro-Black.otf",
+  variable: "--font-tt-commons",
+  display: "swap",
 });
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
+const catchye = localFont({
+  src: "../fonts/Catchye.otf",
+  variable: "--font-catchye",
+  display: "swap",
 });
 
 // Stand-in for the design's Alte Haas Grotesk Bold — same neo-grotesk family
@@ -35,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${playfair.variable} ${inter.variable} h-full antialiased`}
+      className={`${ttCommons.variable} ${catchye.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <Nav />
