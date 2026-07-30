@@ -56,9 +56,11 @@ export default function Home() {
           const divider = i < products.length - 1;
           return (
             <Link key={p.name} href={p.href} className="block bg-cream">
+              {/* Dividers are drawn as shadows: a border would narrow the column
+                  and leave this panel's band sitting lower than its neighbours. */}
               <div
                 className={`${p.tint} ${
-                  divider ? "md:border-r-[3px] md:border-ink" : ""
+                  divider ? "md:shadow-[3px_0_0_0_var(--color-ink)]" : ""
                 }`}
               >
                 <Image
@@ -71,7 +73,7 @@ export default function Home() {
               </div>
               <div
                 className={`bg-ink px-8 py-14 text-center text-4xl text-cream md:py-16 md:text-[3.6vw] ${
-                  divider ? "md:border-r-[3px] md:border-cream" : ""
+                  divider ? "md:shadow-[3px_0_0_0_var(--color-cream)]" : ""
                 }`}
               >
                 <span className="font-display">MADE.</span>
