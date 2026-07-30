@@ -38,7 +38,9 @@ Originals are in `_assets/`.
 ## Fonts
 
 `src/fonts/` holds the design's own faces, wired via `next/font/local`:
-TT Commons Pro Black for `MADE.` and Catchye for the script half. **Both are
+TT Commons Pro Black for the nav, the Shop Products button and `MADE.`;
+Catchye for the script half; Alte Haas Grotesk for the hero headline, the
+claims and the footer links — that split is what the PDF's own pages use. **Both are
 demo cuts, licensed for personal use only** — buy a licence before launch
 (Catchye: https://mjtype.com/product/catchye/).
 
