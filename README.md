@@ -30,10 +30,10 @@ avconvert -s _assets/hero-source.mp4 -o public/video/hero.mp4 \
   -p Preset1920x1080 --duration 12 --replace
 ```
 
-Still placeholders (dashed `Slot` boxes in `src/app/page.tsx`):
-
-- 3 product shots → `public/products/`
-- 1 lifestyle image → `public/images/`
+`public/products/*.jpg` are the supplied renders cropped to 3:4 and scaled
+down onto their own background so the bottle sits about half the panel
+height, as in the design. `public/images/comb.jpg` is the lifestyle shot.
+Originals are in `_assets/`.
 
 `public/logos/wordmark.png` and `monogram.png` are the supplied brand PNGs
 cropped to their artwork (the originals in `_assets/` are 1920x1080 with the

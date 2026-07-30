@@ -1,6 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Monogram } from "@/components/Logo";
-import { Slot } from "@/components/Slot";
 
 // Backdrops are near-identical creams in the design, not product-colour tints.
 const products = [
@@ -57,13 +57,16 @@ export default function Home() {
           return (
             <Link key={p.name} href={p.href} className="block bg-cream">
               <div
-                className={`${p.tint} flex min-h-[520px] items-center justify-center p-10 md:min-h-[640px] ${
+                className={`${p.tint} ${
                   divider ? "md:border-r-[3px] md:border-ink" : ""
                 }`}
               >
-                <Slot
-                  label={`MADE.${p.name} product shot`}
-                  className="aspect-[3/4] w-full max-w-[240px]"
+                <Image
+                  src={`/products/${p.name}.jpg`}
+                  alt={`MADE.${p.name}`}
+                  width={706}
+                  height={941}
+                  className="h-full w-full object-cover"
                 />
               </div>
               <div
@@ -95,9 +98,12 @@ export default function Home() {
             </p>
           ))}
         </div>
-        <Slot
-          label="Lifestyle image — comb / application shot"
-          className="aspect-[4/3] md:aspect-auto md:min-h-[620px]"
+        <Image
+          src="/images/comb.jpg"
+          alt="Product being combed through damp hair"
+          width={735}
+          height={985}
+          className="aspect-[4/3] w-full object-cover md:aspect-auto md:h-full md:min-h-[620px]"
         />
       </section>
     </>
