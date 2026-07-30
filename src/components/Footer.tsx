@@ -23,7 +23,7 @@ export function Footer() {
       <div className="rounded-2xl bg-cream px-6 pb-14 pt-20 md:px-10">
         <Wordmark className="h-[14vw] max-h-[220px]" />
 
-        <div className="mt-16 flex flex-wrap gap-16 text-lg font-extrabold md:gap-[13%] md:text-[1.9vw]">
+        <div className="mt-16 flex flex-wrap gap-16 text-lg font-bold md:gap-[13%] md:text-[1.9vw]">
           <div>
             <h2 className="mb-6 uppercase">Navigate</h2>
             <ul className="space-y-1">

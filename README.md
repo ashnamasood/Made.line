@@ -42,8 +42,10 @@ TT Commons Pro Black for `MADE.` and Catchye for the script half. **Both are
 demo cuts, licensed for personal use only** — buy a licence before launch
 (Catchye: https://mjtype.com/product/catchye/).
 
-Body and UI text is Inter, standing in for the design's Alte Haas Grotesk
-Bold, which wasn't supplied. Drop that file in `src/fonts/` to finish the set.
+Body and UI text is Alte Haas Grotesk (Yann Le Coroller), the design's third
+font — freeware, and its licence file must travel with it, so it sits beside
+the TTFs as `AlteHaasGrotesk-LICENCE.rtf`. Only 400 and 700 ship, so don't
+use `font-extrabold` or `font-black`: the browser would synthesise them.
 
 ## Logos
 

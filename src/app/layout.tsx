@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -19,11 +18,15 @@ const catchye = localFont({
   display: "swap",
 });
 
-// Stand-in for the design's Alte Haas Grotesk Bold — same neo-grotesk family
-// of shapes. Replace with next/font/local once the real file is in src/fonts.
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+// The design's UI face. Only 400 and 700 exist, so nothing heavier than bold
+// should be asked for — the browser would fake it.
+const alteHaas = localFont({
+  src: [
+    { path: "../fonts/AlteHaasGroteskRegular.ttf", weight: "400" },
+    { path: "../fonts/AlteHaasGroteskBold.ttf", weight: "700" },
+  ],
+  variable: "--font-alte-haas",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -39,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ttCommons.variable} ${catchye.variable} ${inter.variable} h-full antialiased`}
+      className={`${ttCommons.variable} ${catchye.variable} ${alteHaas.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <Nav />
