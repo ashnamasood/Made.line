@@ -53,14 +53,15 @@ export default function Home() {
       {/* Products — dividers are dark over the shot, cream over the name band. */}
       <section className="grid md:grid-cols-3">
         {products.map((p, i) => {
-          const divider = i < products.length - 1;
+          // Drawn as a shadow on the panel's left, not a border on the previous
+          // panel's right: a border would narrow that column and drop its band,
+          // and a right-hand shadow gets painted over by the next column.
+          const divider = i > 0;
           return (
             <Link key={p.name} href={p.href} className="block bg-cream">
-              {/* Dividers are drawn as shadows: a border would narrow the column
-                  and leave this panel's band sitting lower than its neighbours. */}
               <div
                 className={`${p.tint} ${
-                  divider ? "md:shadow-[4px_0_0_0_#000]" : ""
+                  divider ? "md:shadow-[-4px_0_0_0_#000]" : ""
                 }`}
               >
                 <Image
@@ -73,7 +74,7 @@ export default function Home() {
               </div>
               <div
                 className={`bg-ink px-8 py-14 text-center text-4xl text-cream md:py-16 md:text-[3.6vw] ${
-                  divider ? "md:shadow-[4px_0_0_0_var(--color-cream)]" : ""
+                  divider ? "md:shadow-[-4px_0_0_0_var(--color-cream)]" : ""
                 }`}
               >
                 <span className="font-display">MADE.</span>
