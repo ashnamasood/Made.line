@@ -102,7 +102,7 @@ export default function Home() {
           src="/images/comb.jpg"
           alt="Product being combed through damp hair"
           width={735}
-          height={985}
+          height={800}
           className="aspect-[4/3] w-full object-cover md:aspect-auto md:h-full md:min-h-[620px]"
         />
       </section>
