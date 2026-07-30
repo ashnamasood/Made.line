@@ -74,9 +74,7 @@ export default function Home() {
                   divider ? "md:border-r-[3px] md:border-cream" : ""
                 }`}
               >
-                {/* The band's dot is square, unlike the round one in the logo. */}
-                <span className="font-display">MADE</span>
-                <span className="mx-[0.05em] inline-block size-[0.17em] bg-current" />
+                <span className="font-display">MADE.</span>
                 <span className="font-script">{p.name}</span>
               </div>
             </Link>
