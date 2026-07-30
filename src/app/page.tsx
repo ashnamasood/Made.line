@@ -60,7 +60,7 @@ export default function Home() {
                   and leave this panel's band sitting lower than its neighbours. */}
               <div
                 className={`${p.tint} ${
-                  divider ? "md:shadow-[3px_0_0_0_var(--color-ink)]" : ""
+                  divider ? "md:shadow-[4px_0_0_0_#000]" : ""
                 }`}
               >
                 <Image
@@ -73,7 +73,7 @@ export default function Home() {
               </div>
               <div
                 className={`bg-ink px-8 py-14 text-center text-4xl text-cream md:py-16 md:text-[3.6vw] ${
-                  divider ? "md:shadow-[3px_0_0_0_var(--color-cream)]" : ""
+                  divider ? "md:shadow-[4px_0_0_0_var(--color-cream)]" : ""
                 }`}
               >
                 <span className="font-display">MADE.</span>
