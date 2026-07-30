@@ -17,7 +17,8 @@ export function Nav() {
         <Link href="/" aria-label="MADE.line home">
           <Wordmark className="h-6 md:h-8" priority />
         </Link>
-        <ul className="hidden items-center gap-8 text-sm font-bold uppercase tracking-wide md:flex lg:gap-14 lg:text-base">
+        {/* 24.5pt on the design's 1366-wide canvas = 1.79% of the page. */}
+        <ul className="hidden items-center gap-8 text-sm font-bold uppercase tracking-wide md:flex md:text-[1.79vw] lg:gap-14">
           {links.map(([label, href]) => (
             <li key={href}>
               <Link href={href} className="hover:opacity-60">

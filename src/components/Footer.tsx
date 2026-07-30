@@ -22,7 +22,8 @@ export function Footer() {
       <div>
         <Wordmark className="h-[14vw] max-h-[220px]" />
 
-        <div className="mt-16 flex flex-wrap gap-16 text-lg font-bold md:gap-[13%] md:text-[1.9vw]">
+        {/* 29.38pt on the design's 1366-wide canvas = 2.15% of the page. */}
+        <div className="mt-16 flex flex-wrap gap-16 text-lg font-bold md:gap-[13%] md:text-[2.15vw]">
           <div>
             <h2 className="mb-6 uppercase">Navigate</h2>
             <ul className="space-y-1">

@@ -39,12 +39,12 @@ export default function Home() {
           <Monogram className="absolute right-6 top-5 h-9 md:right-12 md:top-8 md:h-14" />
           <Link
             href="/shop"
-            className="absolute bottom-8 left-6 rounded-full border-2 border-white px-8 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white hover:bg-white hover:text-ink md:bottom-14 md:left-12 md:border-4 md:px-9 md:py-3 md:text-[0.95vw]"
+            className="absolute bottom-8 left-6 rounded-full border-2 border-white px-8 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white hover:bg-white hover:text-ink md:bottom-14 md:left-12 md:border-4 md:px-9 md:py-3 md:text-[1.35vw]"
           >
             Shop Products
           </Link>
-          {/* Sized off the viewport so it holds the design's proportion to the card. */}
-          <h1 className="absolute bottom-24 right-6 max-w-[14ch] text-right text-3xl font-bold leading-tight md:bottom-14 md:right-12 md:max-w-none md:text-[2.2vw]">
+          {/* The design sets this at the same size as the nav links. */}
+          <h1 className="absolute bottom-24 right-6 max-w-[14ch] text-right text-3xl font-bold leading-tight md:bottom-14 md:right-12 md:max-w-none md:text-[1.79vw]">
             Created for effortless touchups anytime.
           </h1>
         </div>
@@ -93,7 +93,7 @@ export default function Home() {
           {claims.map((c) => (
             <p
               key={c}
-              className="border-t-2 border-ink px-6 py-6 text-xl font-bold last:border-b-2 md:px-10 md:py-8 md:text-3xl"
+              className="border-t-2 border-ink px-6 py-6 text-xl font-bold last:border-b-2 md:px-10 md:py-8 md:text-[2.56vw]"
             >
               {c}
             </p>
