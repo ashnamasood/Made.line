@@ -43,8 +43,8 @@ export default function Home() {
           >
             Shop Products
           </Link>
-          {/* The design sets this at the same size as the nav links. */}
-          <h1 className="absolute bottom-24 right-6 max-w-[14ch] text-right text-3xl font-bold leading-tight md:bottom-14 md:right-12 md:max-w-none md:text-[1.79vw]">
+          {/* Roughly twice the Shop Products label, as in the design. */}
+          <h1 className="absolute bottom-24 right-6 max-w-[14ch] text-right text-3xl font-bold leading-tight md:bottom-14 md:right-12 md:max-w-none md:text-[2.45vw]">
             Created for effortless touchups anytime.
           </h1>
         </div>
@@ -93,7 +93,7 @@ export default function Home() {
           {claims.map((c) => (
             <p
               key={c}
-              className="border-t-2 border-ink px-6 py-6 text-xl font-bold last:border-b-2 md:px-10 md:py-8 md:text-[2.56vw]"
+              className="border-t-2 border-ink px-6 py-6 text-xl font-bold last:border-b-2 md:border-t-4 md:px-10 md:py-8 md:text-[2.56vw] md:last:border-b-4"
             >
               {c}
             </p>
