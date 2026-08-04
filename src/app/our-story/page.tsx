@@ -115,8 +115,8 @@ export default function OurStory() {
       <Image
         src="/images/story-products.jpg"
         alt="MADE.fresh, MADE.even and MADE.slick"
-        width={1800}
-        height={1441}
+        width={1402}
+        height={789}
         className="w-full object-cover"
         sizes="100vw"
       />
