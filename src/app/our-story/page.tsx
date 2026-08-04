@@ -12,9 +12,9 @@ function Lockup() {
 }
 
 // Measured off the rendered design pages, not the extracted point sizes: those
-// sit inside scaled forms. Headings span 53.4% of the page width; body copy is
-// 25px on 33px leading.
-const heading = "text-center font-display text-[6vw] leading-none md:text-[3.55vw]";
+// sit inside scaled forms. Sized from cap height instead: headings cap at 3.3%
+// of the page width, body copy is 25px on 33px leading.
+const heading = "text-center font-display text-[6vw] leading-none md:text-[4.5vw]";
 // Medium, not Regular: the design draws every glyph twice, so the paragraphs
 // sit visibly heavier than plain Archivo Regular.
 const prose = "font-body font-medium text-[2vw] leading-[1.32] max-md:text-base";
@@ -35,14 +35,14 @@ export default function OurStory() {
             playsInline
             preload="metadata"
           />
-          <h1 className="absolute bottom-24 left-6 text-3xl font-bold leading-tight md:bottom-14 md:left-12 md:text-[2.56vw]">
+          <h1 className="absolute bottom-24 left-6 text-3xl font-bold leading-tight md:bottom-14 md:left-12 md:text-[3.7vw]">
             Made well.
             <br />
             Made for you.
           </h1>
           <Link
             href="/shop"
-            className="absolute bottom-8 right-6 rounded-full border-2 border-white px-8 py-3 font-display text-sm uppercase tracking-[0.15em] text-white hover:bg-white hover:text-ink md:bottom-14 md:right-12 md:border-4 md:px-9 md:py-3 md:text-[1.35vw]"
+            className="absolute bottom-8 right-6 rounded-full border-2 border-white px-8 py-3 font-display text-sm uppercase tracking-[0.04em] text-white hover:bg-white hover:text-ink md:bottom-14 md:right-12 md:border-4 md:px-6 md:py-3 md:text-[1.35vw]"
           >
             Shop Products
           </Link>
@@ -89,12 +89,12 @@ export default function OurStory() {
         {/* Sits low in the column, as on the design page: the block starts about
             45% down and clears the bottom by roughly 12% of the page height. */}
         <div className="flex flex-col justify-end px-6 py-16 md:px-[5vw] md:pb-[15%] md:pt-0">
-          <h2 className="font-display text-[8vw] leading-[1.35] md:text-[3.5vw]">
+          <h2 className="font-display text-[8vw] leading-[1.35] md:text-[3.6vw]">
             MADE WELL.
             <br />
             MADE FOR YOU.
           </h2>
-          <p className="mt-[1.4em] font-body font-medium text-[1.95vw] italic leading-[1.35] max-md:text-lg">
+          <p className="mt-[4vw] font-body font-medium text-[1.95vw] italic leading-[1.35] max-md:text-lg">
             Professional quality. Beautifully designed. Made for everyday
             simplicity.
             <br />
