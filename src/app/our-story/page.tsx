@@ -15,7 +15,9 @@ function Lockup() {
 // sit inside scaled forms. Headings span 53.4% of the page width; body copy is
 // 25px on 33px leading.
 const heading = "text-center font-display text-[6vw] leading-none md:text-[3.55vw]";
-const prose = "font-body text-[2vw] leading-[1.32] max-md:text-base";
+// Medium, not Regular: the design draws every glyph twice, so the paragraphs
+// sit visibly heavier than plain Archivo Regular.
+const prose = "font-body font-medium text-[2vw] leading-[1.32] max-md:text-base";
 
 export default function OurStory() {
   return (
@@ -89,7 +91,7 @@ export default function OurStory() {
             <br />
             MADE FOR YOU.
           </h2>
-          <p className="mt-[1.4em] font-body text-[1.95vw] italic leading-[1.35] max-md:text-lg">
+          <p className="mt-[1.4em] font-body font-medium text-[1.95vw] italic leading-[1.35] max-md:text-lg">
             Professional quality. Beautifully designed. Made for everyday
             simplicity.
             <br />

@@ -26,6 +26,7 @@ const archivo = localFont({
     { path: "../fonts/Archivo-Regular.ttf", weight: "400", style: "normal" },
     { path: "../fonts/Archivo-Italic.ttf", weight: "400", style: "italic" },
     { path: "../fonts/Archivo-Medium.ttf", weight: "500", style: "normal" },
+    { path: "../fonts/Archivo-MediumItalic.ttf", weight: "500", style: "italic" },
   ],
   variable: "--font-archivo",
   display: "swap",
