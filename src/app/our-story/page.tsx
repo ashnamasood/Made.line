@@ -11,9 +11,10 @@ function Lockup() {
   );
 }
 
-// Percentages of the design's 1366-wide canvas: headings 73.42pt, body 22.51pt.
-const heading = "text-center font-display text-[6vw] leading-none md:text-[5.37vw]";
-const prose = "font-body text-[1.65vw] leading-[1.55] max-md:text-base";
+// Measured off the rendered design pages — the extracted point sizes sit inside
+// scaled forms, so they overstate the headings.
+const heading = "text-center font-display text-[6vw] leading-none md:text-[4.2vw]";
+const prose = "font-body text-[1.8vw] leading-[1.4] max-md:text-base";
 
 export default function OurStory() {
   return (
@@ -49,12 +50,12 @@ export default function OurStory() {
         <h2 className={heading}>
           STORY ABOUT <Lockup />
         </h2>
-        <div className={`mx-auto mt-[5vw] max-w-[52ch] text-center ${prose}`}>
+        <div className={`mx-auto mt-[4vw] max-w-[52ch] text-center ${prose}`}>
           <p>
             For over a decade, founder Beth Bradley has helped thousands of women
             feel like the best version of themselves.
           </p>
-          <p className="mt-[1.2em]">
+          <p>
             One conversation came up almost every day:
             <br />
             &ldquo;My greys are already coming back.&rdquo;
@@ -62,16 +63,16 @@ export default function OurStory() {
             &ldquo;I wish there was something to get me through until my next
             appointment.&rdquo;
           </p>
-          <p className="mt-[1.2em]">
+          <p>
             Beth understood that feeling personally. She started going grey at
             just 19 and knew how quickly it could affect confidence when your
             reflection no longer felt like you.
           </p>
-          <p className="mt-[1.2em]">
+          <p>
             The products available felt like a compromise — heavy, messy,
             obvious, and never designed to fit effortlessly into everyday life.
           </p>
-          <p className="mt-[1.2em]">
+          <p>
             So she created MADE.line: simple, handbag-friendly essentials that
             make in-between moments feel effortless, helping women feel confident
             every day, not just after a salon appointment.
@@ -82,13 +83,13 @@ export default function OurStory() {
       {/* Made well */}
       <section className="grid bg-cream md:grid-cols-2">
         <div className="flex flex-col justify-center px-6 py-16 md:px-[5vw] md:py-0">
-          <h2 className="font-display text-[8vw] leading-[1.35] md:text-[4.28vw]">
+          <h2 className="font-display text-[8vw] leading-[1.35] md:text-[3.9vw]">
             MADE WELL.
             <br />
             MADE FOR YOU.
           </h2>
           {/* The italic runs larger than the centred body copy: 30.24pt vs 22.51pt. */}
-          <p className="mt-[1.4em] font-body text-[2.21vw] italic leading-[1.5] max-md:text-lg">
+          <p className="mt-[1.4em] font-body text-[2.1vw] italic leading-[1.45] max-md:text-lg">
             Professional quality. Beautifully designed. Made for everyday
             simplicity.
             <br />
@@ -121,22 +122,22 @@ export default function OurStory() {
         <h2 className={heading}>
           WHAT IS <Lockup />
         </h2>
-        <div className={`mx-auto mt-[5vw] max-w-[50ch] text-center ${prose}`}>
+        <div className={`mx-auto mt-[4vw] max-w-[50ch] text-center ${prose}`}>
           <p>
             MADE.line is a collection of elevated everyday hair essentials
             designed to solve real hair concerns with professional performance
             and thoughtful design.
           </p>
-          <p className="mt-[1.2em]">
+          <p>
             Made in Australia and formulated with hair health at its core, every
             product is created to deliver reliable results without compromising
             your hair or scalp.
           </p>
-          <p className="mt-[1.2em]">
+          <p>
             Compact, handbag-friendly, and beautifully designed, MADE.line fits
             effortlessly into your daily routine.
           </p>
-          <p className="mt-[1.2em]">
+          <p>
             Named after founder Beth Bradley&apos;s middle name, Madeline,
             MADE.line is built on one simple belief: everyone deserves products
             made for their hair, their lifestyle, and their confidence.
