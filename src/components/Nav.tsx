@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Wordmark } from "./Logo";
 
 const links = [
-  ["Shop", "/shop"],
   ["Our Story", "/our-story"],
+  ["Shop", "/shop"],
+  ["Community", "/community"],
   ["FAQs", "/faqs"],
-  ["Cart", "/cart"],
   ["Contact", "/contact"],
 ];
 

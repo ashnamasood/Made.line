@@ -2,12 +2,11 @@ import Link from "next/link";
 import { Wordmark } from "./Logo";
 
 const navigate = [
-  ["Shop", "/shop"],
   ["Our Story", "/our-story"],
-  ["Rhode Futures", "/futures"],
-  ["Impact", "/impact"],
-  ["VLOG", "/vlog"],
-  ["Where to Find Us", "/stockists"],
+  ["Shop", "/shop"],
+  ["Community", "/community"],
+  ["FAQs", "/faqs"],
+  ["Contact", "/contact"],
 ];
 
 const social = [
@@ -20,7 +19,7 @@ export function Footer() {
   return (
     <footer className="bg-cream px-6 pb-14 pt-20 md:px-10">
       <div>
-        <Wordmark className="h-[14vw] max-h-[220px]" />
+        <Wordmark className="mx-auto h-[14vw] max-h-[220px]" />
 
         {/* 29.38pt on the design's 1366-wide canvas = 2.15% of the page. */}
         <div className="mt-16 flex flex-wrap gap-16 text-lg font-bold md:gap-[13%] md:text-[2.15vw]">
