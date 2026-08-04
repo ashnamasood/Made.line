@@ -11,8 +11,9 @@ function Lockup() {
   );
 }
 
-const heading = "text-center font-display text-[6vw] leading-none md:text-[4.6vw]";
-const prose = "font-body text-[1.55vw] leading-[1.55] max-md:text-base";
+// Percentages of the design's 1366-wide canvas: headings 73.42pt, body 22.51pt.
+const heading = "text-center font-display text-[6vw] leading-none md:text-[5.37vw]";
+const prose = "font-body text-[1.65vw] leading-[1.55] max-md:text-base";
 
 export default function OurStory() {
   return (
@@ -29,7 +30,7 @@ export default function OurStory() {
             playsInline
             preload="metadata"
           />
-          <h1 className="absolute bottom-24 left-6 text-3xl font-bold leading-tight md:bottom-14 md:left-12 md:text-[2.45vw]">
+          <h1 className="absolute bottom-24 left-6 text-3xl font-bold leading-tight md:bottom-14 md:left-12 md:text-[2.56vw]">
             Made well.
             <br />
             Made for you.
@@ -81,12 +82,13 @@ export default function OurStory() {
       {/* Made well */}
       <section className="grid bg-cream md:grid-cols-2">
         <div className="flex flex-col justify-center px-6 py-16 md:px-[5vw] md:py-0">
-          <h2 className="font-display text-[8vw] leading-[1.35] md:text-[3.6vw]">
+          <h2 className="font-display text-[8vw] leading-[1.35] md:text-[4.28vw]">
             MADE WELL.
             <br />
             MADE FOR YOU.
           </h2>
-          <p className={`mt-[2em] italic ${prose}`}>
+          {/* The italic runs larger than the centred body copy: 30.24pt vs 22.51pt. */}
+          <p className="mt-[1.4em] font-body text-[2.21vw] italic leading-[1.5] max-md:text-lg">
             Professional quality. Beautifully designed. Made for everyday
             simplicity.
             <br />
@@ -108,9 +110,9 @@ export default function OurStory() {
       <Image
         src="/images/story-products.jpg"
         alt="MADE.fresh, MADE.even and MADE.slick"
-        width={1600}
-        height={1999}
-        className="aspect-[4/5] w-full object-cover md:aspect-[16/9]"
+        width={1800}
+        height={1441}
+        className="w-full object-cover"
         sizes="100vw"
       />
 
