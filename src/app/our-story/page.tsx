@@ -85,7 +85,9 @@ export default function OurStory() {
 
       {/* Made well */}
       <section className="grid bg-cream md:grid-cols-2">
-        <div className="flex flex-col justify-center px-6 py-16 md:px-[5vw] md:py-0">
+        {/* Sits low in the column, as on the design page: the block starts about
+            45% down and clears the bottom by roughly 12% of the page height. */}
+        <div className="flex flex-col justify-end px-6 py-16 md:px-[5vw] md:pb-[15%] md:pt-0">
           <h2 className="font-display text-[8vw] leading-[1.35] md:text-[3.5vw]">
             MADE WELL.
             <br />
