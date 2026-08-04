@@ -14,10 +14,10 @@ function Lockup() {
 // Measured off the rendered design pages, not the extracted point sizes: those
 // sit inside scaled forms. Sized from cap height instead: headings cap at 3.3%
 // of the page width, body copy is 25px on 33px leading.
-const heading = "text-center font-display text-[6vw] leading-none md:text-[4.5vw]";
+const heading = "text-center font-display text-[6vw] leading-none md:text-[4.75vw]";
 // Medium, not Regular: the design draws every glyph twice, so the paragraphs
 // sit visibly heavier than plain Archivo Regular.
-const prose = "font-body font-medium text-[2vw] leading-[1.32] max-md:text-base";
+const prose = "font-body font-medium text-[1.82vw] leading-[1.32] max-md:text-base";
 
 export default function OurStory() {
   return (
@@ -89,12 +89,12 @@ export default function OurStory() {
         {/* Sits low in the column, as on the design page: the block starts about
             45% down and clears the bottom by roughly 12% of the page height. */}
         <div className="flex flex-col justify-end px-6 py-16 md:px-[5vw] md:pb-[15%] md:pt-0">
-          <h2 className="font-display text-[8vw] leading-[1.35] md:text-[3.6vw]">
+          <h2 className="font-display text-[8vw] leading-[1.35] md:text-[3.85vw]">
             MADE WELL.
             <br />
             MADE FOR YOU.
           </h2>
-          <p className="mt-[4vw] font-body font-medium text-[1.95vw] italic leading-[1.35] max-md:text-lg">
+          <p className="mt-[4vw] max-w-[36vw] font-body font-medium text-[2.05vw] italic leading-[1.35] max-md:max-w-none max-md:text-lg">
             Professional quality. Beautifully designed. Made for everyday
             simplicity.
             <br />
@@ -108,7 +108,7 @@ export default function OurStory() {
           alt="MADE.fresh held beside the face"
           width={1200}
           height={1499}
-          className="aspect-[4/5] w-full object-cover md:aspect-auto md:h-full"
+          className="aspect-[4/5] w-full object-cover object-top md:aspect-auto md:h-full"
         />
       </section>
 
