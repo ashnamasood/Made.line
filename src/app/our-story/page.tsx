@@ -11,10 +11,11 @@ function Lockup() {
   );
 }
 
-// Measured off the rendered design pages — the extracted point sizes sit inside
-// scaled forms, so they overstate the headings.
-const heading = "text-center font-display text-[6vw] leading-none md:text-[4.2vw]";
-const prose = "font-body text-[1.8vw] leading-[1.4] max-md:text-base";
+// Measured off the rendered design pages, not the extracted point sizes: those
+// sit inside scaled forms. Headings span 53.4% of the page width; body copy is
+// 25px on 33px leading.
+const heading = "text-center font-display text-[6vw] leading-none md:text-[3.55vw]";
+const prose = "font-body text-[2vw] leading-[1.32] max-md:text-base";
 
 export default function OurStory() {
   return (
@@ -50,7 +51,7 @@ export default function OurStory() {
         <h2 className={heading}>
           STORY ABOUT <Lockup />
         </h2>
-        <div className={`mx-auto mt-[4vw] max-w-[52ch] text-center ${prose}`}>
+        <div className={`mx-auto mt-[4.5vw] max-w-[52ch] text-center ${prose}`}>
           <p>
             For over a decade, founder Beth Bradley has helped thousands of women
             feel like the best version of themselves.
@@ -83,13 +84,12 @@ export default function OurStory() {
       {/* Made well */}
       <section className="grid bg-cream md:grid-cols-2">
         <div className="flex flex-col justify-center px-6 py-16 md:px-[5vw] md:py-0">
-          <h2 className="font-display text-[8vw] leading-[1.35] md:text-[3.9vw]">
+          <h2 className="font-display text-[8vw] leading-[1.35] md:text-[3.5vw]">
             MADE WELL.
             <br />
             MADE FOR YOU.
           </h2>
-          {/* The italic runs larger than the centred body copy: 30.24pt vs 22.51pt. */}
-          <p className="mt-[1.4em] font-body text-[2.1vw] italic leading-[1.45] max-md:text-lg">
+          <p className="mt-[1.4em] font-body text-[1.95vw] italic leading-[1.35] max-md:text-lg">
             Professional quality. Beautifully designed. Made for everyday
             simplicity.
             <br />
@@ -122,7 +122,7 @@ export default function OurStory() {
         <h2 className={heading}>
           WHAT IS <Lockup />
         </h2>
-        <div className={`mx-auto mt-[4vw] max-w-[50ch] text-center ${prose}`}>
+        <div className={`mx-auto mt-[4.5vw] max-w-[45ch] text-center ${prose}`}>
           <p>
             MADE.line is a collection of elevated everyday hair essentials
             designed to solve real hair concerns with professional performance
