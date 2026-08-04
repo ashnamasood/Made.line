@@ -1,16 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-/**
- * "MADE." in the display face, "line" in the script. Catchye sits small on the
- * em, so the design sets it at a larger point size than the Black text —
- * matched here so the script reads the same width as "MADE.".
- */
+/** "MADE." in the display face, "line" in the script — as the headings set it. */
 function Lockup() {
   return (
     <>
       <span className="font-display">MADE.</span>
-      <span className="font-script text-[1.4em] tracking-[0.18em]">line</span>
+      <span className="font-script">line</span>
     </>
   );
 }
@@ -18,10 +14,10 @@ function Lockup() {
 // Measured off the rendered design pages, not the extracted point sizes: those
 // sit inside scaled forms. Sized from cap height instead: headings cap at 3.3%
 // of the page width, body copy is 25px on 33px leading.
-const heading = "text-center font-display text-[6vw] leading-none md:text-[4.15vw]";
+const heading = "text-center font-display text-[6vw] leading-none md:text-[4.5vw]";
 // Medium, not Regular: the design draws every glyph twice, so the paragraphs
 // sit visibly heavier than plain Archivo Regular.
-const prose = "font-body font-medium text-[1.7vw] leading-[1.55] max-md:text-base";
+const prose = "font-body font-medium text-[2vw] leading-[1.32] max-md:text-base";
 
 export default function OurStory() {
   return (
