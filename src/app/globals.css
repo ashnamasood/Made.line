@@ -11,6 +11,7 @@
   --font-display: var(--font-tt-commons), sans-serif;
   --font-script: var(--font-catchye), serif;
   --font-sans: var(--font-alte-haas), system-ui, sans-serif;
+  --font-body: var(--font-archivo), system-ui, sans-serif;
 }
 
 body {

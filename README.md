@@ -44,6 +44,9 @@ claims and the footer links — that split is what the PDF's own pages use. **Bo
 demo cuts, licensed for personal use only** — buy a licence before launch
 (Catchye: https://mjtype.com/product/catchye/).
 
+Archivo (SIL OFL, licence kept as `Archivo-OFL.txt`) sets the story page's
+paragraphs — `font-body`.
+
 Body and UI text is Alte Haas Grotesk (Yann Le Coroller), the design's third
 font — freeware, and its licence file must travel with it, so it sits beside
 the TTFs as `AlteHaasGrotesk-LICENCE.rtf`. Only 400 and 700 ship, so don't

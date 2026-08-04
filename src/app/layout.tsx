@@ -20,6 +20,17 @@ const catchye = localFont({
 
 // The design's UI face. Only 400 and 700 exist, so nothing heavier than bold
 // should be asked for — the browser would fake it.
+// Body copy on the story page.
+const archivo = localFont({
+  src: [
+    { path: "../fonts/Archivo-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../fonts/Archivo-Italic.ttf", weight: "400", style: "italic" },
+    { path: "../fonts/Archivo-Medium.ttf", weight: "500", style: "normal" },
+  ],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
 const alteHaas = localFont({
   src: [
     { path: "../fonts/AlteHaasGroteskRegular.ttf", weight: "400" },
@@ -42,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ttCommons.variable} ${catchye.variable} ${alteHaas.variable} h-full antialiased`}
+      className={`${ttCommons.variable} ${catchye.variable} ${alteHaas.variable} ${archivo.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <Nav />
