@@ -35,7 +35,7 @@ export default function OurStory() {
             playsInline
             preload="metadata"
           />
-          <h1 className="absolute bottom-24 left-6 text-3xl font-bold leading-tight md:bottom-14 md:left-12 md:text-[3.7vw]">
+          <h1 className="absolute bottom-24 left-6 font-display text-3xl leading-tight md:bottom-14 md:left-12 md:text-[3.7vw]">
             Made well.
             <br />
             Made for you.
@@ -94,11 +94,18 @@ export default function OurStory() {
             <br />
             MADE FOR YOU.
           </h2>
-          <p className="mt-[4vw] max-w-[36vw] font-body font-medium text-[2.05vw] italic leading-[1.35] max-md:max-w-none max-md:text-lg">
-            Professional quality. Beautifully designed. Made for everyday
-            simplicity.
+          {/* Broken where the design breaks it. Natural wrapping can't land
+              these: the window between "…everyday simplicity." fitting and
+              "…Beautifully designed." not fitting is too narrow to hold. The
+              mid-sentence breaks are desktop-only. */}
+          <p className="mt-[4vw] font-body font-medium text-[2.05vw] italic leading-[1.35] max-md:text-lg">
+            Professional quality. Beautifully
+            <br className="max-md:hidden" />
+            designed. Made for everyday simplicity.
             <br />
-            No complicated routines. No unnecessary products.
+            No complicated routines. No
+            <br className="max-md:hidden" />
+            unnecessary products.
             <br />
             Just what your hair needs.
           </p>
