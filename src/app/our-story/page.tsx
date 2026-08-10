@@ -21,8 +21,8 @@ const prose = "font-body font-medium text-[1.82vw] leading-[1.32] max-md:text-ba
 
 export default function OurStory() {
   return (
-    // data-page drives the cream page background — see globals.css.
-    <div data-page="story">
+    // data-bg drives the cream page background — see globals.css.
+    <div data-bg="cream">
       {/* Hero */}
       <section className="p-2 md:px-[2vw] md:pb-[2vw] md:pt-[1vw]">
         <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-blush md:aspect-auto md:h-[calc(100svh-3.5rem-4.5vw)]">

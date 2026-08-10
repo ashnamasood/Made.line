@@ -14,9 +14,9 @@
   --font-body: var(--font-archivo), system-ui, sans-serif;
 }
 
-/* The story page is cream edge to edge, including the gutter around the nav —
-   which the page itself can't reach, since the nav lives in the root layout. */
-body:has([data-page="story"]) {
+/* Cream edge to edge, including the gutter around the nav — which a page
+   can't reach itself, since the nav lives in the root layout. */
+body:has([data-bg="cream"]) {
   background: var(--color-cream);
 }
 
