@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/components/CartProvider";
+import { Wordmark } from "@/components/Logo";
 import { PRODUCTS, money } from "@/lib/products";
 
 const field =
@@ -47,10 +48,13 @@ export default function Checkout() {
   }
 
   return (
-    <div className="grid md:grid-cols-2">
+    <div className="grid md:min-h-dvh md:grid-cols-2">
       {/* Contact + shipping */}
       <div className="px-6 py-12 md:px-[6vw]">
-        <h1 className="font-display text-2xl uppercase">Checkout</h1>
+        <Link href="/" aria-label="MADE.line home" className="inline-block">
+          <Wordmark className="h-7" />
+        </Link>
+        <h1 className="mt-10 font-display text-2xl uppercase">Checkout</h1>
 
         <form
           className="mt-8 space-y-4"

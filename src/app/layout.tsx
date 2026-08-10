@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { CartDrawer } from "@/components/CartDrawer";
 import { CartProvider } from "@/components/CartProvider";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 // The design's own faces: TT Commons Pro Black sets "MADE." and Catchye the
@@ -61,9 +59,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <CartProvider>
-          <Nav />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          {children}
           <CartDrawer />
         </CartProvider>
       </body>
