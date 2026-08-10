@@ -95,7 +95,9 @@ export default function Shop() {
                 {item.title}
               </p>
               <div
-                className={`mt-[clamp(0px,2.8vw,42px)] space-y-[0.9em] font-body font-medium leading-[1.45] max-md:max-w-none max-md:text-base ${item.body} ${item.copyWidth}`}
+                // Regular, not Medium: unlike the heading/subhead (each drawn three
+            // times in the design), the body copy is single-drawn.
+            className={`mt-[clamp(0px,2.8vw,42px)] space-y-[0.9em] font-body leading-[1.45] max-md:max-w-none max-md:text-base ${item.body} ${item.copyWidth}`}
               >
                 {item.copy.map((para) => (
                   <p key={para.slice(0, 24)}>{para}</p>
