@@ -18,7 +18,7 @@ import { ProductRow } from "@/components/ProductRow";
  * 3.9vw is the largest that still keeps every tagline on one line — the
  * longest, "Cover it. Blend it. Feel even", wraps above ~4.3vw.
  */
-const TAG_SIZE = "md:text-[clamp(0px,3.9vw,59px)]";
+const TAG_SIZE = "md:text-[clamp(0px,3.74vw,56.6px)]";
 
 const items = [
   {
@@ -26,10 +26,10 @@ const items = [
     title: "Flyaway Balm Stick",
     accent: "bg-[#fdbdd9]",
     body: "md:text-[clamp(0px,1.26vw,19px)]",
-    made: "md:text-[clamp(0px,5.59vw,84.5px)]",
-    script: "md:text-[clamp(0px,6.73vw,101.8px)]",
-    sub: "md:text-[clamp(0px,2.23vw,33.7px)]",
-    cart: "md:text-[clamp(0px,1.46vw,22.1px)]",
+    made: "md:text-[clamp(0px,5.37vw,81.1px)]",
+    script: "md:text-[clamp(0px,6.46vw,97.7px)]",
+    sub: "md:text-[clamp(0px,2.14vw,32.4px)]",
+    cart: "md:text-[clamp(0px,1.4vw,21.2px)]",
     aspect: "aspect-[0.738]",
     size: [843, 1143],
     lines: [
@@ -48,10 +48,10 @@ const items = [
     title: "Dry Shampoo",
     accent: "bg-[#faecb0]",
     body: "md:text-[clamp(0px,1.37vw,20.7px)]",
-    made: "md:text-[clamp(0px,5.69vw,86px)]",
-    script: "md:text-[clamp(0px,6.48vw,98px)]",
-    sub: "md:text-[clamp(0px,2.22vw,33.6px)]",
-    cart: "md:text-[clamp(0px,1.46vw,22.1px)]",
+    made: "md:text-[clamp(0px,5.46vw,82.6px)]",
+    script: "md:text-[clamp(0px,6.22vw,94.1px)]",
+    sub: "md:text-[clamp(0px,2.13vw,32.3px)]",
+    cart: "md:text-[clamp(0px,1.4vw,21.2px)]",
     aspect: "aspect-[0.803]",
     size: [976, 1216],
     reverse: true,
@@ -72,10 +72,10 @@ const items = [
     title: "Grey Coverage Stick",
     accent: "bg-[#a8c7f1]",
     body: "md:text-[clamp(0px,1.34vw,20.2px)]",
-    made: "md:text-[clamp(0px,5.55vw,83.9px)]",
-    script: "md:text-[clamp(0px,6.06vw,91.6px)]",
-    sub: "md:text-[clamp(0px,2.18vw,33px)]",
-    cart: "md:text-[clamp(0px,1.52vw,23px)]",
+    made: "md:text-[clamp(0px,5.33vw,80.5px)]",
+    script: "md:text-[clamp(0px,5.82vw,87.9px)]",
+    sub: "md:text-[clamp(0px,2.09vw,31.7px)]",
+    cart: "md:text-[clamp(0px,1.46vw,22.1px)]",
     aspect: "aspect-[0.818]",
     size: [885, 1082],
     lines: [
@@ -139,8 +139,8 @@ export default function Shop() {
           >
             <div>
               <h2 className="text-[9vw] leading-none">
-                <span className={`font-display ${item.made}`}>MADE.</span>
-                <span className={`font-script ${item.script}`}>
+                <span className={`font-display [-webkit-text-stroke:0.4px_var(--color-ink)] ${item.made}`}>MADE.</span>
+                <span className={`font-script [-webkit-text-stroke:0.4px_var(--color-ink)] ${item.script}`}>
                   {item.name}
                 </span>
               </h2>
@@ -169,13 +169,13 @@ export default function Shop() {
             </div>
 
             <div>
-              <p className={`font-script text-4xl ${TAG_SIZE}`}>
+              <p className={`font-script [-webkit-text-stroke:0.4px_var(--color-ink)] text-4xl ${TAG_SIZE}`}>
                 {item.tagline}
               </p>
               {/* The design sets this in the display face, not Archivo, and
                   spaces the letters in the text itself rather than by tracking. */}
               <button
-                className={`mt-[clamp(0px,2.42vw,36.6px)] w-full rounded-full border-2 border-ink py-4 font-display uppercase tracking-[0.12em] md:border-4 md:py-[clamp(0px,0.95vw,14.5px)] ${item.cart} ${item.accent}`}
+                className={`mt-[clamp(0px,2.42vw,36.6px)] w-full rounded-full border-2 border-ink py-4 font-display [-webkit-text-stroke:0.4px_var(--color-ink)] uppercase tracking-[0.12em] md:border-4 md:py-[clamp(0px,0.95vw,14.5px)] ${item.cart} ${item.accent}`}
                 type="button"
               >
                 Add to Cart
