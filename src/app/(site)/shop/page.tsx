@@ -140,14 +140,14 @@ export default function Shop() {
             }`}
           >
             <div>
-              <h2 className="text-[9vw] leading-none">
+              <h2 className="text-[9vw] leading-none md:leading-[0.78]">
                 <span className={`font-display [-webkit-text-stroke:0.4px_var(--color-ink)] ${item.made}`}>MADE.</span>
                 <span className={`font-script [-webkit-text-stroke:0.4px_var(--color-ink)] ${item.script}`}>
                   {item.name}
                 </span>
               </h2>
               <p
-                className={`mt-2 font-body text-xl font-bold md:mt-[max(-20px,-1.32vw)] ${item.sub}`}
+                className={`mt-2 font-body text-xl font-bold [-webkit-text-stroke:0.35px_var(--color-ink)] md:mt-[clamp(0px,0.75vw,11.3px)] ${item.sub}`}
               >
                 {item.title}
               </p>
