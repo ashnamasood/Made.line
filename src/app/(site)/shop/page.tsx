@@ -29,7 +29,7 @@ const items = [
     script: "md:text-[clamp(0px,6.46vw,97.7px)]",
     sub: "md:text-[clamp(0px,2.14vw,32.4px)]",
     cart: "md:text-[clamp(0px,1.4vw,21.2px)]",
-    tag: "md:text-[clamp(0px,3.62vw,54.7px)]",
+    tag: "md:text-[clamp(0px,2.99vw,45.2px)] md:tracking-[0.104em]",
     aspect: "aspect-[0.738]",
     size: [843, 1143],
     lines: [
@@ -52,7 +52,7 @@ const items = [
     script: "md:text-[clamp(0px,6.22vw,94.1px)]",
     sub: "md:text-[clamp(0px,2.13vw,32.3px)]",
     cart: "md:text-[clamp(0px,1.4vw,21.2px)]",
-    tag: "md:text-[clamp(0px,3.39vw,51.3px)]",
+    tag: "md:text-[clamp(0px,2.76vw,41.7px)] md:tracking-[0.111em]",
     aspect: "aspect-[0.803]",
     size: [976, 1216],
     reverse: true,
@@ -77,7 +77,7 @@ const items = [
     script: "md:text-[clamp(0px,5.82vw,87.9px)]",
     sub: "md:text-[clamp(0px,2.09vw,31.7px)]",
     cart: "md:text-[clamp(0px,1.46vw,22.1px)]",
-    tag: "md:text-[clamp(0px,3.4vw,51.4px)]",
+    tag: "md:text-[clamp(0px,2.87vw,43.4px)] md:tracking-[0.098em]",
     aspect: "aspect-[0.818]",
     size: [885, 1082],
     lines: [
@@ -171,7 +171,7 @@ export default function Shop() {
             </div>
 
             <div>
-              <p className={`font-script [-webkit-text-stroke:0.0324em_var(--color-ink)] text-4xl tracking-[0.023em] ${item.tag}`}>
+              <p className={`font-script [-webkit-text-stroke:0.0324em_var(--color-ink)] text-4xl ${item.tag}`}>
                 {item.tagline}
               </p>
               {/* The design sets this in the display face, not Archivo, and
