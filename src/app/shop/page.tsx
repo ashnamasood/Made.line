@@ -78,9 +78,15 @@ export default function Shop() {
         <section
           key={item.name}
           id={item.name}
-          className="grid scroll-mt-4 bg-cream md:grid-cols-[56fr_44fr]"
+          className={`grid scroll-mt-4 bg-cream ${
+            item.reverse ? "md:grid-cols-[44fr_56fr]" : "md:grid-cols-[56fr_44fr]"
+          }`}
         >
-          {/* Copy and photo swap sides down the page, as in the design. */}
+          {/* Copy and photo swap sides down the page, as in the design. order-2
+              reorders which track each element paints into, but grid tracks are
+              sized by position, not by content — so a reversed item needs its
+              column fractions flipped too, or the image (still first in DOM)
+              lands in the bigger track meant for the copy. */}
           <div
             className={`flex flex-col justify-between gap-[6vw] px-6 py-16 md:px-[5.5vw] md:py-[6vw] ${
               item.reverse ? "md:order-2" : ""
