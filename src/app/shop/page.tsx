@@ -1,23 +1,36 @@
 import Image from "next/image";
 import { ProductRow } from "@/components/ProductRow";
 
+/**
+ * Sizes are percentages of the design page's width, read from the PDF's own
+ * font metrics. Two things those metrics don't tell you directly:
+ *
+ * - Our Catchye.otf is a different cut from the PDF's CatchyeDemo: it sits
+ *   ~30% smaller on the em, so matching the design means scaling it well past
+ *   the PDF's nominal size. Archivo and TT Commons match within 0.7%.
+ * - Line pitch is perfectly uniform in all three blocks, so the copy has no
+ *   paragraph gaps — it's one block with hard line breaks.
+ */
 const items = [
   {
     name: "slick",
     title: "Flyaway Balm Stick",
     accent: "bg-[#fdbdd9]",
-    // The design shrinks this one's body copy to fit the longer blurb.
-    body: "text-[clamp(0px,1.26vw,19px)]",
+    body: "md:text-[clamp(0px,1.26vw,19px)]",
     made: "md:text-[clamp(0px,5.59vw,84.5px)]",
-    script: "md:text-[clamp(0px,5.84vw,88.3px)]",
-    sub: "md:text-[clamp(0px,2.14vw,32.4px)]",
-    tag: "md:text-[clamp(0px,2.99vw,45.2px)]",
+    script: "md:text-[clamp(0px,6.73vw,101.8px)]",
+    sub: "md:text-[clamp(0px,2.23vw,33.7px)]",
+    tag: "md:text-[clamp(0px,3.87vw,58.5px)]",
     cart: "md:text-[clamp(0px,1.46vw,22.1px)]",
     aspect: "aspect-[0.738]",
-    copyWidth: "max-w-[clamp(0px,40vw,605px)]",
     size: [843, 1143],
-    copy: [
-      "Effortless hair, wherever you go. MADE.SLICK is a lightweight flyaway balm designed for quick, easy touch-ups on the go. Smooth down frizz, tame flyaways, and refine your look without the stiffness or residue. The compact stick makes styling simple just swipe, smooth, and go. Perfect for sleek buns, polished ponytails, clean-girl looks, or refreshing your style throughout the day.",
+    lines: [
+      "Effortless hair, wherever you go. MADE.SLICK is a lightweight flyaway",
+      "balm designed for quick, easy touch-ups on the go. Smooth down frizz,",
+      "tame flyaways, and refine your look without the stiffness or residue.",
+      "The compact stick makes styling simple just swipe, smooth, and go.",
+      "Perfect for sleek buns, polished ponytails, clean-girl looks, or refreshing",
+      "your style throughout the day.",
     ],
     tagline: "Slick it. Smooth it. Own it.",
     alt: "MADE.slick beside a model resting on a table",
@@ -26,19 +39,23 @@ const items = [
     name: "fresh",
     title: "Dry Shampoo",
     accent: "bg-[#faecb0]",
-    body: "text-[clamp(0px,1.37vw,20.7px)]",
+    body: "md:text-[clamp(0px,1.37vw,20.7px)]",
     made: "md:text-[clamp(0px,5.69vw,86px)]",
-    script: "md:text-[clamp(0px,5.94vw,89.8px)]",
-    sub: "md:text-[clamp(0px,2.18vw,33px)]",
-    tag: "md:text-[clamp(0px,2.76vw,41.7px)]",
+    script: "md:text-[clamp(0px,6.48vw,98px)]",
+    sub: "md:text-[clamp(0px,2.22vw,33.6px)]",
+    tag: "md:text-[clamp(0px,3.64vw,55px)]",
     cart: "md:text-[clamp(0px,1.46vw,22.1px)]",
     aspect: "aspect-[0.803]",
-    copyWidth: "max-w-[clamp(0px,38vw,575px)]",
     size: [976, 1216],
     reverse: true,
-    copy: [
-      "Fresh hair, no wash day required. MADE.FRESH is a lightweight dry shampoo designed to instantly refresh your roots, absorb excess oil, and bring life back to your hair between washes.",
-      "Perfect for busy mornings, post-workout touch-ups, or extending your style for another day. Simply apply, blend, and go for hair that feels fresh, clean, and effortlessly put together.",
+    lines: [
+      "Fresh hair, no wash day required. MADE.FRESH is a",
+      "lightweight dry shampoo designed to instantly refresh your",
+      "roots, absorb excess oil, and bring life back to your hair",
+      "between washes.",
+      "Perfect for busy mornings, post-workout touch-ups, or",
+      "extending your style for another day. Simply apply, blend, and",
+      "go for hair that feels fresh, clean, and effortlessly put together.",
     ],
     tagline: "Refresh it. Revive it.",
     alt: "MADE.fresh held beside the face",
@@ -47,19 +64,22 @@ const items = [
     name: "even",
     title: "Grey Coverage Stick",
     accent: "bg-[#a8c7f1]",
-    body: "text-[clamp(0px,1.34vw,20.2px)]",
+    body: "md:text-[clamp(0px,1.34vw,20.2px)]",
     made: "md:text-[clamp(0px,5.55vw,83.9px)]",
-    script: "md:text-[clamp(0px,5.79vw,87.5px)]",
-    sub: "md:text-[clamp(0px,2.12vw,32.1px)]",
-    tag: "md:text-[clamp(0px,2.87vw,43.4px)]",
+    script: "md:text-[clamp(0px,6.06vw,91.6px)]",
+    sub: "md:text-[clamp(0px,2.18vw,33px)]",
+    tag: "md:text-[clamp(0px,3.62vw,54.7px)]",
     cart: "md:text-[clamp(0px,1.52vw,23px)]",
     aspect: "aspect-[0.818]",
-    copyWidth: "max-w-[clamp(0px,36vw,545px)]",
     size: [885, 1082],
-    copy: [
+    lines: [
       "A quick touch-up for those in-between moments.",
-      "MADE.EVEN is a convenient grey coverage stick designed to seamlessly blend into your hair, helping disguise visible greys and grown-out roots in seconds.",
-      "Easy to apply and effortless to carry, it’s your go-to for last-minute plans, special occasions, or simply keeping your hair looking polished between colour appointments.",
+      "MADE.EVEN is a convenient grey coverage stick designed",
+      "to seamlessly blend into your hair, helping disguise visible",
+      "greys and grown-out roots in seconds.",
+      "Easy to apply and effortless to carry, it’s your go-to for last-",
+      "minute plans, special occasions, or simply keeping your hair",
+      "looking polished between colour appointments.",
     ],
     tagline: "Cover it. Blend it. Feel even",
     alt: "MADE.even held against curly hair",
@@ -93,8 +113,12 @@ export default function Shop() {
         <section
           key={item.name}
           id={item.name}
-          className={`grid scroll-mt-4 bg-cream ${
-            item.reverse ? "md:grid-cols-[44fr_56fr]" : "md:grid-cols-[56fr_44fr]"
+          // The design page is 16:9; letting the photo's own ratio drive the
+          // height made the block taller than the design.
+          className={`grid scroll-mt-4 bg-cream md:aspect-[16/9] ${
+            item.reverse
+              ? "md:grid-cols-[42.2fr_57.8fr]"
+              : "md:grid-cols-[57.8fr_42.2fr]"
           }`}
         >
           {/* Copy and photo swap sides down the page, as in the design. order-2
@@ -103,31 +127,39 @@ export default function Shop() {
               column fractions flipped too, or the image (still first in DOM)
               lands in the bigger track meant for the copy. */}
           <div
-            className={`flex flex-col justify-between gap-[6vw] px-6 py-16 md:px-[5.5vw] md:py-[6vw] ${
+            className={`flex flex-col justify-between px-6 py-16 md:px-[5.5vw] md:pb-[5.55vw] md:pt-[3.95vw] ${
               item.reverse ? "md:order-2" : ""
             }`}
           >
             <div>
-              {/* The two halves are set at different sizes in the design —
-                  Catchye sits smaller on the em, so it runs slightly larger. */}
               <h2 className="text-[9vw] leading-none">
                 <span className={`font-display ${item.made}`}>MADE.</span>
                 <span className={`font-script ${item.script}`}>
                   {item.name}
                 </span>
               </h2>
-              <p className={`mt-[clamp(0px,0.92vw,14px)] font-body text-xl font-bold ${item.sub}`}>
+              <p
+                className={`mt-[clamp(0px,0.92vw,14px)] font-body text-xl font-bold ${item.sub}`}
+              >
                 {item.title}
               </p>
-              <div
-                // Regular, not Medium: unlike the heading/subhead (each drawn
-                // three times in the design), the body copy is single-drawn.
-                className={`mt-[clamp(0px,2.32vw,35px)] space-y-[0.75em] font-body leading-[1.35] max-md:max-w-none max-md:text-base ${item.body} ${item.copyWidth}`}
+              <p
+                className={`mt-[clamp(0px,2.32vw,35px)] font-body leading-[1.35] max-md:text-base ${item.body}`}
               >
-                {item.copy.map((para) => (
-                  <p key={para.slice(0, 24)}>{para}</p>
+                {item.lines.map((line, i) => (
+                  <span key={line}>
+                    {line}
+                    {i < item.lines.length - 1 && (
+                      <>
+                        {/* No space after a hyphen, so "last-" joins straight
+                            onto "minute" once the break is hidden. */}
+                        {line.endsWith("-") ? "" : " "}
+                        <br className="max-md:hidden" />
+                      </>
+                    )}
+                  </span>
                 ))}
-              </div>
+              </p>
             </div>
 
             <div>
@@ -150,9 +182,11 @@ export default function Shop() {
             alt={item.alt}
             width={item.size[0]}
             height={item.size[1]}
-            sizes="(min-width: 768px) 44vw, 100vw"
-            className={`w-full border-ink object-cover md:border-l-[clamp(2px,0.6vw,9px)] ${
-              item.reverse ? "md:border-l-0 md:border-r-[clamp(2px,0.6vw,9px)]" : ""
+            sizes="(min-width: 768px) 42vw, 100vw"
+            className={`w-full border-ink object-cover md:aspect-auto md:h-full md:border-l-[clamp(2px,0.6vw,9px)] ${
+              item.reverse
+                ? "md:border-l-0 md:border-r-[clamp(2px,0.6vw,9px)]"
+                : ""
             } ${item.aspect}`}
           />
         </section>
