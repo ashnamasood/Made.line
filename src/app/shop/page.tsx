@@ -8,6 +8,11 @@ const items = [
     accent: "bg-[#fdbdd9]",
     // The design shrinks this one's body copy to fit the longer blurb.
     body: "text-[clamp(0px,1.26vw,19px)]",
+    made: "md:text-[clamp(0px,5.59vw,84.5px)]",
+    script: "md:text-[clamp(0px,5.84vw,88.3px)]",
+    sub: "md:text-[clamp(0px,2.14vw,32.4px)]",
+    tag: "md:text-[clamp(0px,2.99vw,45.2px)]",
+    cart: "md:text-[clamp(0px,1.46vw,22.1px)]",
     aspect: "aspect-[0.738]",
     copyWidth: "max-w-[clamp(0px,40vw,605px)]",
     size: [843, 1143],
@@ -22,6 +27,11 @@ const items = [
     title: "Dry Shampoo",
     accent: "bg-[#faecb0]",
     body: "text-[clamp(0px,1.37vw,20.7px)]",
+    made: "md:text-[clamp(0px,5.69vw,86px)]",
+    script: "md:text-[clamp(0px,5.94vw,89.8px)]",
+    sub: "md:text-[clamp(0px,2.18vw,33px)]",
+    tag: "md:text-[clamp(0px,2.76vw,41.7px)]",
+    cart: "md:text-[clamp(0px,1.46vw,22.1px)]",
     aspect: "aspect-[0.803]",
     copyWidth: "max-w-[clamp(0px,38vw,575px)]",
     size: [976, 1216],
@@ -38,6 +48,11 @@ const items = [
     title: "Grey Coverage Stick",
     accent: "bg-[#a8c7f1]",
     body: "text-[clamp(0px,1.34vw,20.2px)]",
+    made: "md:text-[clamp(0px,5.55vw,83.9px)]",
+    script: "md:text-[clamp(0px,5.79vw,87.5px)]",
+    sub: "md:text-[clamp(0px,2.12vw,32.1px)]",
+    tag: "md:text-[clamp(0px,2.87vw,43.4px)]",
+    cart: "md:text-[clamp(0px,1.52vw,23px)]",
     aspect: "aspect-[0.818]",
     copyWidth: "max-w-[clamp(0px,36vw,545px)]",
     size: [885, 1082],
@@ -93,17 +108,21 @@ export default function Shop() {
             }`}
           >
             <div>
-              <h2 className="text-[9vw] leading-none md:text-[clamp(0px,5.95vw,90px)]">
-                <span className="font-display">MADE.</span>
-                <span className="font-script">{item.name}</span>
+              {/* The two halves are set at different sizes in the design —
+                  Catchye sits smaller on the em, so it runs slightly larger. */}
+              <h2 className="text-[9vw] leading-none">
+                <span className={`font-display ${item.made}`}>MADE.</span>
+                <span className={`font-script ${item.script}`}>
+                  {item.name}
+                </span>
               </h2>
-              <p className="mt-[1.5vw] font-body text-xl font-bold md:text-[clamp(0px,2.25vw,34px)]">
+              <p className={`mt-[clamp(0px,0.92vw,14px)] font-body text-xl font-bold ${item.sub}`}>
                 {item.title}
               </p>
               <div
                 // Regular, not Medium: unlike the heading/subhead (each drawn
                 // three times in the design), the body copy is single-drawn.
-                className={`mt-[clamp(0px,2.8vw,42px)] space-y-[0.9em] font-body leading-[1.45] max-md:max-w-none max-md:text-base ${item.body} ${item.copyWidth}`}
+                className={`mt-[clamp(0px,2.32vw,35px)] space-y-[0.75em] font-body leading-[1.35] max-md:max-w-none max-md:text-base ${item.body} ${item.copyWidth}`}
               >
                 {item.copy.map((para) => (
                   <p key={para.slice(0, 24)}>{para}</p>
@@ -112,11 +131,13 @@ export default function Shop() {
             </div>
 
             <div>
-              <p className="font-script text-4xl md:text-[clamp(0px,3.8vw,57.5px)]">
+              <p className={`font-script text-4xl ${item.tag}`}>
                 {item.tagline}
               </p>
+              {/* The design sets this in the display face, not Archivo, and
+                  spaces the letters in the text itself rather than by tracking. */}
               <button
-                className={`mt-[clamp(0px,2.8vw,42px)] w-full rounded-full border-2 border-ink py-4 font-body font-bold uppercase tracking-[0.25em] md:border-4 md:py-[clamp(0px,0.95vw,14.5px)] md:text-[clamp(0px,1.25vw,19px)] ${item.accent}`}
+                className={`mt-[clamp(0px,2.42vw,36.6px)] w-full rounded-full border-2 border-ink py-4 font-display uppercase tracking-[0.12em] md:border-4 md:py-[clamp(0px,0.95vw,14.5px)] ${item.cart} ${item.accent}`}
                 type="button"
               >
                 Add to Cart
