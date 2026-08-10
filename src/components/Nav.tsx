@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { CartButton } from "./CartButton";
 import { Wordmark } from "./Logo";
 
 const links = [
@@ -30,9 +29,6 @@ export function Nav() {
               </Link>
             </li>
           ))}
-          <li>
-            <CartButton className="uppercase hover:opacity-60" />
-          </li>
         </ul>
         <details className="relative md:hidden">
           <summary className="cursor-pointer list-none text-sm font-display font-normal uppercase">
@@ -44,9 +40,6 @@ export function Nav() {
                 <Link href={href}>{label}</Link>
               </li>
             ))}
-            <li>
-              <CartButton className="uppercase" />
-            </li>
           </ul>
         </details>
       </nav>
