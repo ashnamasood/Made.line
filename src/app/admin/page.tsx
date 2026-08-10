@@ -1,56 +1,101 @@
 import { db } from "@/lib/db";
+import { money } from "@/lib/products";
 
 export const dynamic = "force-dynamic";
 
-type Lead = { email: string; items: string[]; last_added: string };
+type Item = { id: string; qty: number; title: string; unit_price: number };
+type Order = {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  address: string;
+  apartment: string | null;
+  city: string;
+  state: string;
+  postcode: string;
+  country: string;
+  phone: string | null;
+  items: Item[];
+  subtotal: number;
+  created_at: string;
+};
 
-async function getLeads(): Promise<Lead[] | null> {
+async function getOrders(): Promise<Order[] | null> {
   if (!process.env.DATABASE_URL) return null;
   try {
     const rows = await db()`
-      SELECT email, array_agg(product ORDER BY created_at) AS items,
-             max(created_at) AS last_added
-      FROM cart_leads
-      GROUP BY email
-      ORDER BY last_added DESC`;
-    return rows as Lead[];
+      SELECT * FROM orders ORDER BY created_at DESC LIMIT 200`;
+    return rows as Order[];
   } catch {
     return [];
   }
 }
 
 export default async function Admin() {
-  const leads = await getLeads();
+  const orders = await getOrders();
 
   return (
     <div className="px-6 py-16 md:px-10">
-      <h1 className="text-3xl font-bold">Cart leads</h1>
+      <h1 className="font-display text-3xl uppercase">Orders</h1>
 
-      {leads === null ? (
-        <p className="mt-6">DATABASE_URL is not set.</p>
-      ) : leads.length === 0 ? (
-        <p className="mt-6">No cart activity yet.</p>
+      {orders === null ? (
+        <p className="mt-6 font-body">DATABASE_URL is not set.</p>
+      ) : orders.length === 0 ? (
+        <p className="mt-6 font-body">No orders yet.</p>
       ) : (
-        <table className="mt-8 w-full max-w-2xl border-collapse text-left">
-          <thead>
-            <tr className="border-b-2 border-ink">
-              <th className="py-2 pr-4">Email</th>
-              <th className="py-2 pr-4">Items</th>
-              <th className="py-2">Last added</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leads.map((row) => (
-              <tr key={row.email} className="border-b border-ink/20">
-                <td className="py-2 pr-4">{row.email}</td>
-                <td className="py-2 pr-4">{row.items.join(", ")}</td>
-                <td className="py-2">
-                  {new Date(row.last_added).toLocaleString()}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="mt-8 space-y-6">
+          {orders.map((o) => (
+            <article
+              key={o.id}
+              className="max-w-3xl rounded-xl border border-ink/20 p-6 font-body"
+            >
+              <div className="flex flex-wrap justify-between gap-2">
+                <span className="font-bold">Order #{o.id}</span>
+                <span className="text-ink/60">
+                  {new Date(o.created_at).toLocaleString()}
+                </span>
+              </div>
+
+              <ul className="mt-4 space-y-1">
+                {o.items.map((i) => (
+                  <li key={i.id} className="flex justify-between">
+                    <span>
+                      {i.qty} × MADE.{i.id}{" "}
+                      <span className="text-ink/60">({i.title})</span>
+                    </span>
+                    <span>{money(i.unit_price * i.qty)}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mt-3 flex justify-between border-t border-ink/15 pt-3 font-bold">
+                <span>Subtotal</span>
+                <span>{money(o.subtotal)}</span>
+              </p>
+
+              <div className="mt-4 border-t border-ink/15 pt-3 text-sm">
+                <p className="font-bold">
+                  {o.first_name} {o.last_name}
+                </p>
+                <p>{o.email}</p>
+                {o.phone && <p>{o.phone}</p>}
+                <p className="text-ink/70">
+                  {[
+                    o.address,
+                    o.apartment,
+                    o.city,
+                    o.state,
+                    o.postcode,
+                    o.country,
+                  ]
+                    .filter(Boolean)
+                    .join(", ")}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
       )}
     </div>
   );

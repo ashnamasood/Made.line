@@ -7,15 +7,25 @@ pnpm install
 pnpm dev
 ```
 
-## Cart
+## Cart and orders
 
-Add to Cart doesn't run a real cart — clicking it asks for an email inline
-and posts `{email, product}` to `POST /api/cart`, stored in `cart_leads`.
-View it at `/admin`, grouped by email with each product they added.
+The cart lives in `localStorage` (`CartProvider`) — no account needed. Add to
+Cart opens a slide-out drawer; `/checkout` collects contact and shipping
+details and posts to `POST /api/orders`, which stores the order in `orders`
+and emails the admin.
 
-`/admin` is behind HTTP Basic Auth (`src/proxy.ts`) — set `ADMIN_USER` and
-`ADMIN_PASSWORD` alongside `DATABASE_URL`, locally and in Vercel. Without
-them the route returns 503.
+**Prices are placeholders** in `src/lib/products.ts` — the design never states
+them. Everything reads from there, so one edit updates cart, checkout, the
+order email and the admin list. Totals are computed server-side from that
+file, never from the request body.
+
+There is no payment step: orders are recorded and emailed, and the checkout
+says so. Wire a payment provider into `/api/orders` when there is one.
+
+`/admin` lists orders behind HTTP Basic Auth (`src/proxy.ts`). Set
+`ADMIN_USER` and `ADMIN_PASSWORD` alongside `DATABASE_URL`, locally and in
+Vercel. For the order email set `RESEND_API_KEY`, `ADMIN_EMAIL` and
+`FROM_EMAIL`; without them orders still save and the miss is logged.
 
 ## Contact form
 

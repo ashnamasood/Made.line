@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { AddToCart } from "@/components/AddToCart";
 import { ProductRow } from "@/components/ProductRow";
+import type { ProductId } from "@/lib/products";
 
 /**
  * Sizes are percentages of the design page's width, read from the PDF's own
@@ -176,7 +177,7 @@ export default function Shop() {
               {/* The design sets this in the display face, not Archivo, and
                   spaces the letters in the text itself rather than by tracking. */}
               <AddToCart
-                product={item.name}
+                product={item.name as ProductId}
                 className={`mt-[clamp(0px,2.42vw,36.6px)] w-full rounded-full border-2 border-ink py-4 font-display [-webkit-text-stroke:0.4px_var(--color-ink)] uppercase tracking-[0.12em] md:border-4 md:py-[clamp(0px,0.95vw,14.5px)] ${item.cart} ${item.accent}`}
               />
             </div>
