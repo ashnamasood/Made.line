@@ -147,12 +147,12 @@ export default function Shop() {
                 </span>
               </h2>
               <p
-                className={`mt-[clamp(0px,0.92vw,14px)] font-body text-xl font-bold ${item.sub}`}
+                className={`mt-2 font-body text-xl font-bold md:mt-[max(-20px,-1.32vw)] ${item.sub}`}
               >
                 {item.title}
               </p>
               <p
-                className={`mt-[clamp(0px,2.32vw,35px)] font-body leading-[1.35] max-md:text-base ${item.body}`}
+                className={`mt-6 font-body font-medium leading-[1.35] max-md:text-base md:mt-[clamp(0px,1.83vw,27.7px)] ${item.body}`}
               >
                 {item.lines.map((line, i) => (
                   <span key={line}>
