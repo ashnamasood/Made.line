@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { sendAdminEmail } from "@/lib/email";
+import { ensureOrdersSchema } from "@/lib/orders";
 import { PRODUCTS, isProductId, money, type ProductId } from "@/lib/products";
 
 const FIELDS = {
@@ -14,31 +15,6 @@ const FIELDS = {
   country: { max: 100, required: true },
   phone: { max: 40, required: false },
 } as const;
-
-let ready: Promise<unknown> | null = null;
-function ensureTables() {
-  const sql = db();
-  // Line items live as JSON on the order: they're only ever read back with
-  // their order, so a second table would buy nothing here.
-  ready ??= sql`
-    CREATE TABLE IF NOT EXISTS orders (
-      id          bigserial PRIMARY KEY,
-      email       text        NOT NULL,
-      first_name  text        NOT NULL,
-      last_name   text        NOT NULL,
-      address     text        NOT NULL,
-      apartment   text,
-      city        text        NOT NULL,
-      state       text        NOT NULL,
-      postcode    text        NOT NULL,
-      country     text        NOT NULL,
-      phone       text,
-      items       jsonb       NOT NULL,
-      subtotal    integer     NOT NULL,
-      created_at  timestamptz NOT NULL DEFAULT now()
-    )`;
-  return ready;
-}
 
 type Line = { id: ProductId; qty: number };
 
@@ -104,7 +80,7 @@ export async function POST(request: Request) {
 
   let orderId: number;
   try {
-    await ensureTables();
+    await ensureOrdersSchema();
     const rows = (await db()`
       INSERT INTO orders (email, first_name, last_name, address, apartment,
                           city, state, postcode, country, phone, items, subtotal)
