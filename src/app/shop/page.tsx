@@ -7,7 +7,9 @@ const items = [
     title: "Flyaway Balm Stick",
     accent: "bg-pink",
     // The design shrinks this one's body copy to fit the longer blurb.
-    body: "text-[1.3vw]",
+    body: "text-[1.16vw]",
+    aspect: "aspect-[0.738]",
+    size: [843, 1143],
     copy: [
       "Effortless hair, wherever you go. MADE.SLICK is a lightweight flyaway balm designed for quick, easy touch-ups on the go. Smooth down frizz, tame flyaways, and refine your look without the stiffness or residue. The compact stick makes styling simple just swipe, smooth, and go. Perfect for sleek buns, polished ponytails, clean-girl looks, or refreshing your style throughout the day.",
     ],
@@ -18,7 +20,9 @@ const items = [
     name: "fresh",
     title: "Dry Shampoo",
     accent: "bg-butter",
-    body: "text-[1.45vw]",
+    body: "text-[1.29vw]",
+    aspect: "aspect-[0.803]",
+    size: [976, 1216],
     reverse: true,
     copy: [
       "Fresh hair, no wash day required. MADE.FRESH is a lightweight dry shampoo designed to instantly refresh your roots, absorb excess oil, and bring life back to your hair between washes.",
@@ -31,7 +35,9 @@ const items = [
     name: "even",
     title: "Grey Coverage Stick",
     accent: "bg-peri",
-    body: "text-[1.45vw]",
+    body: "text-[1.29vw]",
+    aspect: "aspect-[0.818]",
+    size: [885, 1082],
     copy: [
       "A quick touch-up for those in-between moments.",
       "MADE.EVEN is a convenient grey coverage stick designed to seamlessly blend into your hair, helping disguise visible greys and grown-out roots in seconds.",
@@ -78,15 +84,15 @@ export default function Shop() {
             }`}
           >
             <div>
-              <h2 className="text-[9vw] leading-none md:text-[4.4vw]">
+              <h2 className="text-[9vw] leading-none md:text-[4.9vw]">
                 <span className="font-display">MADE.</span>
                 <span className="font-script">{item.name}</span>
               </h2>
-              <p className="mt-[1.2vw] font-body font-bold text-xl md:text-[2.15vw]">
+              <p className="mt-[1.5vw] font-body text-xl font-bold md:text-[2.15vw]">
                 {item.title}
               </p>
               <div
-                className={`mt-[1.8vw] space-y-[0.9em] font-body leading-[1.45] max-md:text-base ${item.body}`}
+                className={`mt-[2.8vw] space-y-[0.9em] font-body leading-[1.45] max-md:text-base ${item.body}`}
               >
                 {item.copy.map((para) => (
                   <p key={para.slice(0, 24)}>{para}</p>
@@ -95,11 +101,11 @@ export default function Shop() {
             </div>
 
             <div>
-              <p className="font-script text-4xl md:text-[2.87vw]">
+              <p className="font-script text-4xl md:text-[3vw]">
                 {item.tagline}
               </p>
               <button
-                className={`mt-[1.5vw] w-full rounded-full border-2 border-ink py-4 font-body font-bold uppercase tracking-[0.25em] md:border-[3px] md:py-[1.1vw] md:text-[1.35vw] ${item.accent}`}
+                className={`mt-[2.8vw] w-full rounded-full border-2 border-ink py-4 font-body font-bold uppercase tracking-[0.25em] md:border-4 md:py-[1.1vw] md:text-[1.5vw] ${item.accent}`}
                 type="button"
               >
                 Add to Cart
@@ -110,10 +116,10 @@ export default function Shop() {
           <Image
             src={`/images/shop-${item.name}.jpg`}
             alt={item.alt}
-            width={1086}
-            height={1448}
+            width={item.size[0]}
+            height={item.size[1]}
             sizes="(min-width: 768px) 44vw, 100vw"
-            className="aspect-[3/4] w-full object-cover"
+            className={`w-full object-cover ${item.aspect}`}
           />
         </section>
       ))}
