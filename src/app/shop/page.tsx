@@ -108,7 +108,7 @@ export default function Shop() {
                 {item.tagline}
               </p>
               <button
-                className={`mt-[2.8vw] w-full rounded-full border-2 border-ink py-4 font-body font-bold uppercase tracking-[0.25em] md:border-4 md:py-[1.1vw] md:text-[1.5vw] ${item.accent}`}
+                className={`mt-[2.8vw] w-full rounded-full border-2 border-ink py-4 font-body font-bold uppercase tracking-[0.25em] md:border-4 md:py-[0.95vw] md:text-[1.25vw] ${item.accent}`}
                 type="button"
               >
                 Add to Cart
