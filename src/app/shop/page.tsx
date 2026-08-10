@@ -8,7 +8,7 @@ const items = [
     accent: "bg-[#fdbdd9]",
     // The design shrinks this one's body copy to fit the longer blurb.
     body: "text-[clamp(0px,1.26vw,19px)]",
-    aspect: "aspect-[0.738]",
+    aspect: "aspect-[0.738] md:aspect-auto md:h-[min(59.6vw,82svh)]",
     copyWidth: "max-w-[clamp(0px,40vw,605px)]",
     size: [843, 1143],
     copy: [
@@ -22,7 +22,7 @@ const items = [
     title: "Dry Shampoo",
     accent: "bg-[#faecb0]",
     body: "text-[clamp(0px,1.37vw,20.7px)]",
-    aspect: "aspect-[0.803]",
+    aspect: "aspect-[0.803] md:aspect-auto md:h-[min(69.7vw,82svh)]",
     copyWidth: "max-w-[clamp(0px,38vw,575px)]",
     size: [976, 1216],
     reverse: true,
@@ -38,7 +38,7 @@ const items = [
     title: "Grey Coverage Stick",
     accent: "bg-[#a8c7f1]",
     body: "text-[clamp(0px,1.34vw,20.2px)]",
-    aspect: "aspect-[0.818]",
+    aspect: "aspect-[0.818] md:aspect-auto md:h-[min(53.8vw,82svh)]",
     copyWidth: "max-w-[clamp(0px,36vw,545px)]",
     size: [885, 1082],
     copy: [
@@ -87,6 +87,10 @@ export default function Shop() {
               sized by position, not by content — so a reversed item needs its
               column fractions flipped too, or the image (still first in DOM)
               lands in the bigger track meant for the copy. */}
+          {/* The image's height sets the row height (its width is a grid
+              fraction, so its natural aspect ratio drives the row); capping it
+              with min(...,82svh) keeps that on ordinary windows and stops a
+              tall portrait crop from pushing the block past the fold. */}
           <div
             className={`flex flex-col justify-between gap-[6vw] px-6 py-16 md:px-[5.5vw] md:py-[6vw] ${
               item.reverse ? "md:order-2" : ""
