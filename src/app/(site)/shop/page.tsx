@@ -171,7 +171,7 @@ export default function Shop() {
             </div>
 
             <div>
-              <p className={`font-script [-webkit-text-stroke:0.0388em_var(--color-ink)] text-4xl tracking-[0.023em] ${item.tag}`}>
+              <p className={`font-script [-webkit-text-stroke:0.0324em_var(--color-ink)] text-4xl tracking-[0.035em] ${item.tag}`}>
                 {item.tagline}
               </p>
               {/* The design sets this in the display face, not Archivo, and
