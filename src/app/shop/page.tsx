@@ -15,8 +15,10 @@ import { ProductRow } from "@/components/ProductRow";
  * only one weight, so at a smaller size a short tagline reads visibly
  * chunkier than a longer one at a larger size — a hinting artifact, not a
  * real weight difference. A single size keeps all three reading the same.
+ * 3.9vw is the largest that still keeps every tagline on one line — the
+ * longest, "Cover it. Blend it. Feel even", wraps above ~4.3vw.
  */
-const TAG_SIZE = "md:text-[clamp(0px,6.3vw,95.2px)]";
+const TAG_SIZE = "md:text-[clamp(0px,3.9vw,59px)]";
 
 const items = [
   {
