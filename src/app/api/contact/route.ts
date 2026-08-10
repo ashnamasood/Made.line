@@ -1,4 +1,4 @@
-import { neon } from "@neondatabase/serverless";
+import { db } from "@/lib/db";
 
 const LIMITS = {
   name: 200,
@@ -7,15 +7,6 @@ const LIMITS = {
   topic: 200,
   details: 5000,
 } as const;
-
-// Created on first request, not at module load, so a build without
-// DATABASE_URL set doesn't fail.
-let client: ReturnType<typeof neon> | null = null;
-function db() {
-  const url = process.env.DATABASE_URL;
-  if (!url) throw new Error("DATABASE_URL is not set");
-  return (client ??= neon(url));
-}
 
 // ponytail: DDL on cold start instead of a migration tool — one table, one app.
 // Move to migrations if a second table shows up.

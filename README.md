@@ -7,6 +7,16 @@ pnpm install
 pnpm dev
 ```
 
+## Cart
+
+Add to Cart doesn't run a real cart — clicking it asks for an email inline
+and posts `{email, product}` to `POST /api/cart`, stored in `cart_leads`.
+View it at `/admin`, grouped by email with each product they added.
+
+`/admin` is behind HTTP Basic Auth (`src/proxy.ts`) — set `ADMIN_USER` and
+`ADMIN_PASSWORD` alongside `DATABASE_URL`, locally and in Vercel. Without
+them the route returns 503.
+
 ## Contact form
 
 `POST /api/contact` validates the payload and inserts into a Postgres table
