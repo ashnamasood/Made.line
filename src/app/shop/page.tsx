@@ -7,9 +7,9 @@ const items = [
     title: "Flyaway Balm Stick",
     accent: "bg-[#fdbdd9]",
     // The design shrinks this one's body copy to fit the longer blurb.
-    body: "text-[1.16vw]",
+    body: "text-[clamp(0px,1.16vw,17.5px)]",
     aspect: "aspect-[0.738]",
-    copyWidth: "max-w-[39vw]",
+    copyWidth: "max-w-[clamp(0px,39vw,590px)]",
     size: [843, 1143],
     copy: [
       "Effortless hair, wherever you go. MADE.SLICK is a lightweight flyaway balm designed for quick, easy touch-ups on the go. Smooth down frizz, tame flyaways, and refine your look without the stiffness or residue. The compact stick makes styling simple just swipe, smooth, and go. Perfect for sleek buns, polished ponytails, clean-girl looks, or refreshing your style throughout the day.",
@@ -21,9 +21,9 @@ const items = [
     name: "fresh",
     title: "Dry Shampoo",
     accent: "bg-[#faecb0]",
-    body: "text-[1.29vw]",
+    body: "text-[clamp(0px,1.29vw,19.5px)]",
     aspect: "aspect-[0.803]",
-    copyWidth: "max-w-[38vw]",
+    copyWidth: "max-w-[clamp(0px,38vw,575px)]",
     size: [976, 1216],
     reverse: true,
     copy: [
@@ -37,9 +37,9 @@ const items = [
     name: "even",
     title: "Grey Coverage Stick",
     accent: "bg-[#a8c7f1]",
-    body: "text-[1.29vw]",
+    body: "text-[clamp(0px,1.29vw,19.5px)]",
     aspect: "aspect-[0.818]",
-    copyWidth: "max-w-[36vw]",
+    copyWidth: "max-w-[clamp(0px,36vw,545px)]",
     size: [885, 1082],
     copy: [
       "A quick touch-up for those in-between moments.",
@@ -87,15 +87,15 @@ export default function Shop() {
             }`}
           >
             <div>
-              <h2 className="text-[9vw] leading-none md:text-[5.95vw]">
+              <h2 className="text-[9vw] leading-none md:text-[clamp(0px,5.95vw,90px)]">
                 <span className="font-display">MADE.</span>
                 <span className="font-script">{item.name}</span>
               </h2>
-              <p className="mt-[1.5vw] font-body text-xl font-bold md:text-[2.25vw]">
+              <p className="mt-[1.5vw] font-body text-xl font-bold md:text-[clamp(0px,2.25vw,34px)]">
                 {item.title}
               </p>
               <div
-                className={`mt-[2.8vw] space-y-[0.9em] font-body font-medium leading-[1.45] max-md:max-w-none max-md:text-base ${item.body} ${item.copyWidth}`}
+                className={`mt-[clamp(0px,2.8vw,42px)] space-y-[0.9em] font-body font-medium leading-[1.45] max-md:max-w-none max-md:text-base ${item.body} ${item.copyWidth}`}
               >
                 {item.copy.map((para) => (
                   <p key={para.slice(0, 24)}>{para}</p>
@@ -104,11 +104,11 @@ export default function Shop() {
             </div>
 
             <div>
-              <p className="font-script text-4xl md:text-[3.8vw]">
+              <p className="font-script text-4xl md:text-[clamp(0px,3.8vw,57.5px)]">
                 {item.tagline}
               </p>
               <button
-                className={`mt-[2.8vw] w-full rounded-full border-2 border-ink py-4 font-body font-bold uppercase tracking-[0.25em] md:border-4 md:py-[0.95vw] md:text-[1.25vw] ${item.accent}`}
+                className={`mt-[clamp(0px,2.8vw,42px)] w-full rounded-full border-2 border-ink py-4 font-body font-bold uppercase tracking-[0.25em] md:border-4 md:py-[clamp(0px,0.95vw,14.5px)] md:text-[clamp(0px,1.25vw,19px)] ${item.accent}`}
                 type="button"
               >
                 Add to Cart
@@ -122,8 +122,8 @@ export default function Shop() {
             width={item.size[0]}
             height={item.size[1]}
             sizes="(min-width: 768px) 44vw, 100vw"
-            className={`w-full border-ink object-cover md:border-l-[0.6vw] ${
-              item.reverse ? "md:border-l-0 md:border-r-[0.6vw]" : ""
+            className={`w-full border-ink object-cover md:border-l-[clamp(2px,0.6vw,9px)] ${
+              item.reverse ? "md:border-l-0 md:border-r-[clamp(2px,0.6vw,9px)]" : ""
             } ${item.aspect}`}
           />
         </section>
