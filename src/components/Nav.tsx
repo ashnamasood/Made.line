@@ -1,10 +1,13 @@
 import Link from "next/link";
+import { CartButton } from "./CartButton";
 import { Wordmark } from "./Logo";
 
-const links = [
+// null marks where the cart button goes, so it keeps its place in the order
+// on both the desktop row and the mobile menu.
+const links: ([string, string] | null)[] = [
   ["Our Story", "/our-story"],
   ["Shop", "/shop"],
-  ["Community", "/community"],
+  null,
   ["FAQs", "/faqs"],
   ["Contact", "/contact"],
 ];
@@ -22,11 +25,15 @@ export function Nav() {
             for the nav. It only ships one weight, so no font-bold on top of it.
             24.5pt on the design's 1366-wide canvas = 1.79% of the page. */}
         <ul className="hidden items-center gap-8 text-sm font-display font-normal uppercase tracking-wide md:flex md:text-[1.79vw] lg:gap-14">
-          {links.map(([label, href]) => (
-            <li key={href}>
-              <Link href={href} className="hover:opacity-60">
-                {label}
-              </Link>
+          {links.map((link) => (
+            <li key={link ? link[1] : "cart"}>
+              {link ? (
+                <Link href={link[1]} className="hover:opacity-60">
+                  {link[0]}
+                </Link>
+              ) : (
+                <CartButton className="uppercase hover:opacity-60" />
+              )}
             </li>
           ))}
         </ul>
@@ -35,9 +42,13 @@ export function Nav() {
             Menu
           </summary>
           <ul className="absolute right-0 mt-3 w-44 space-y-3 bg-peri p-4 text-sm font-display font-normal uppercase shadow-lg">
-            {links.map(([label, href]) => (
-              <li key={href}>
-                <Link href={href}>{label}</Link>
+            {links.map((link) => (
+              <li key={link ? link[1] : "cart"}>
+                {link ? (
+                  <Link href={link[1]}>{link[0]}</Link>
+                ) : (
+                  <CartButton className="uppercase" />
+                )}
               </li>
             ))}
           </ul>

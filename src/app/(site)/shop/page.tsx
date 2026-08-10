@@ -189,10 +189,13 @@ export default function Shop() {
             width={item.size[0]}
             height={item.size[1]}
             sizes="(min-width: 768px) 42vw, 100vw"
-            className={`w-full border-ink object-cover md:aspect-auto md:h-full md:border-l-[clamp(2px,0.6vw,9px)] ${
+            // Only ever emit one edge: cancelling a border with border-l-0
+            // relies on source order at equal specificity, and Tailwind emits
+            // it first, so the cancel silently lost and left a stray rule.
+            className={`w-full border-ink object-cover md:aspect-auto md:h-full ${
               item.reverse
-                ? "md:border-l-0 md:border-r-[clamp(2px,0.6vw,9px)]"
-                : ""
+                ? "md:border-r-[clamp(2px,0.6vw,9px)]"
+                : "md:border-l-[clamp(2px,0.6vw,9px)]"
             } ${item.aspect}`}
           />
         </section>
