@@ -7,9 +7,9 @@ const items = [
     title: "Flyaway Balm Stick",
     accent: "bg-[#fdbdd9]",
     // The design shrinks this one's body copy to fit the longer blurb.
-    body: "text-[clamp(0px,1.16vw,17.5px)]",
+    body: "text-[clamp(0px,1.26vw,19px)]",
     aspect: "aspect-[0.738]",
-    copyWidth: "max-w-[clamp(0px,39vw,590px)]",
+    copyWidth: "max-w-[clamp(0px,40vw,605px)]",
     size: [843, 1143],
     copy: [
       "Effortless hair, wherever you go. MADE.SLICK is a lightweight flyaway balm designed for quick, easy touch-ups on the go. Smooth down frizz, tame flyaways, and refine your look without the stiffness or residue. The compact stick makes styling simple just swipe, smooth, and go. Perfect for sleek buns, polished ponytails, clean-girl looks, or refreshing your style throughout the day.",
@@ -21,7 +21,7 @@ const items = [
     name: "fresh",
     title: "Dry Shampoo",
     accent: "bg-[#faecb0]",
-    body: "text-[clamp(0px,1.29vw,19.5px)]",
+    body: "text-[clamp(0px,1.37vw,20.7px)]",
     aspect: "aspect-[0.803]",
     copyWidth: "max-w-[clamp(0px,38vw,575px)]",
     size: [976, 1216],
@@ -37,7 +37,7 @@ const items = [
     name: "even",
     title: "Grey Coverage Stick",
     accent: "bg-[#a8c7f1]",
-    body: "text-[clamp(0px,1.29vw,19.5px)]",
+    body: "text-[clamp(0px,1.34vw,20.2px)]",
     aspect: "aspect-[0.818]",
     copyWidth: "max-w-[clamp(0px,36vw,545px)]",
     size: [885, 1082],
@@ -101,9 +101,9 @@ export default function Shop() {
                 {item.title}
               </p>
               <div
-                // Regular, not Medium: unlike the heading/subhead (each drawn three
-            // times in the design), the body copy is single-drawn.
-            className={`mt-[clamp(0px,2.8vw,42px)] space-y-[0.9em] font-body leading-[1.45] max-md:max-w-none max-md:text-base ${item.body} ${item.copyWidth}`}
+                // Regular, not Medium: unlike the heading/subhead (each drawn
+                // three times in the design), the body copy is single-drawn.
+                className={`mt-[clamp(0px,2.8vw,42px)] space-y-[0.9em] font-body leading-[1.45] max-md:max-w-none max-md:text-base ${item.body} ${item.copyWidth}`}
               >
                 {item.copy.map((para) => (
                   <p key={para.slice(0, 24)}>{para}</p>
