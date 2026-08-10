@@ -24,8 +24,9 @@ says so. Wire a payment provider into `/api/orders` when there is one.
 
 `/admin` lists orders behind HTTP Basic Auth (`src/proxy.ts`). Set
 `ADMIN_USER` and `ADMIN_PASSWORD` alongside `DATABASE_URL`, locally and in
-Vercel. For the order email set `RESEND_API_KEY`, `ADMIN_EMAIL` and
-`FROM_EMAIL`; without them orders still save and the miss is logged.
+Vercel. For the order email set `RESEND_API_KEY` and `FROM_EMAIL`; `ADMIN_EMAIL`
+defaults to `ashna@credminds.com`. Without the key or sender, orders still
+save and the miss is logged.
 
 Orders carry a `status` of `pending` or `done`. The admin filters by it and
 searches name, email or order number; both are URL state (`?status=&q=`), so

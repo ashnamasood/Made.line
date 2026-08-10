@@ -13,14 +13,11 @@ import type { ProductId } from "@/lib/products";
  * - Line pitch is perfectly uniform in all three blocks, so the copy has no
  *   paragraph gaps — it's one block with hard line breaks.
  *
- * Taglines are ONE shared size (TAG_SIZE below), not per-item: Catchye has
- * only one weight, so at a smaller size a short tagline reads visibly
- * chunkier than a longer one at a larger size — a hinting artifact, not a
- * real weight difference. A single size keeps all three reading the same.
- * 3.9vw is the largest that still keeps every tagline on one line — the
- * longest, "Cover it. Blend it. Feel even", wraps above ~4.3vw.
+ * Taglines are sized per product, not shared: the design gives slick a larger
+ * setting than the other two, and one shared size left each about a
+ * percentage point of page width off. Solved so each matches the PDF's own
+ * rendered width; all stay on one line (the longest wraps above ~4.3vw).
  */
-const TAG_SIZE = "md:text-[clamp(0px,3.74vw,56.6px)]";
 
 const items = [
   {
@@ -32,6 +29,7 @@ const items = [
     script: "md:text-[clamp(0px,6.46vw,97.7px)]",
     sub: "md:text-[clamp(0px,2.14vw,32.4px)]",
     cart: "md:text-[clamp(0px,1.4vw,21.2px)]",
+    tag: "md:text-[clamp(0px,3.85vw,58.2px)]",
     aspect: "aspect-[0.738]",
     size: [843, 1143],
     lines: [
@@ -54,6 +52,7 @@ const items = [
     script: "md:text-[clamp(0px,6.22vw,94.1px)]",
     sub: "md:text-[clamp(0px,2.13vw,32.3px)]",
     cart: "md:text-[clamp(0px,1.4vw,21.2px)]",
+    tag: "md:text-[clamp(0px,3.61vw,54.6px)]",
     aspect: "aspect-[0.803]",
     size: [976, 1216],
     reverse: true,
@@ -78,6 +77,7 @@ const items = [
     script: "md:text-[clamp(0px,5.82vw,87.9px)]",
     sub: "md:text-[clamp(0px,2.09vw,31.7px)]",
     cart: "md:text-[clamp(0px,1.46vw,22.1px)]",
+    tag: "md:text-[clamp(0px,3.62vw,54.7px)]",
     aspect: "aspect-[0.818]",
     size: [885, 1082],
     lines: [
@@ -171,7 +171,7 @@ export default function Shop() {
             </div>
 
             <div>
-              <p className={`font-script [-webkit-text-stroke:0.4px_var(--color-ink)] text-4xl ${TAG_SIZE}`}>
+              <p className={`font-script [-webkit-text-stroke:0.4px_var(--color-ink)] text-4xl ${item.tag}`}>
                 {item.tagline}
               </p>
               {/* The design sets this in the display face, not Archivo, and

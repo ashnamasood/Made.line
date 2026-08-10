@@ -36,9 +36,9 @@ async function load(status: "all" | "pending" | "done", q: string): Promise<Data
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <main className="px-6 py-12 md:px-10">
-      <Wordmark className="h-7" />
-      <h1 className="mt-8 font-display text-3xl uppercase">Orders</h1>
+    <main className="mx-auto w-full max-w-3xl px-6 py-12">
+      <Wordmark className="mx-auto h-8" />
+      <h1 className="mt-8 text-center font-display text-3xl uppercase">Orders</h1>
       {children}
     </main>
   );
@@ -80,7 +80,7 @@ export default async function Admin({
           Couldn&apos;t load orders — this is a database error, not an empty
           shop.
         </p>
-        <pre className="mt-3 max-w-3xl overflow-x-auto rounded-lg bg-ink/5 p-4 font-body text-sm">
+        <pre className="mt-3 overflow-x-auto rounded-lg bg-ink/5 p-4 font-body text-sm">
           {data.message}
         </pre>
       </Shell>
@@ -96,7 +96,7 @@ export default async function Admin({
 
   return (
     <Shell>
-      <div className="mt-8 grid max-w-3xl grid-cols-3 gap-4">
+      <div className="mt-8 grid grid-cols-3 gap-4">
         <Stat label="Orders" value={String(totals.orders)} />
         <Stat label="To fulfil" value={String(totals.pending)} />
         <Stat label="Revenue" value={money(totals.revenue)} />
@@ -104,7 +104,7 @@ export default async function Admin({
 
       {/* Filter and search are plain links and a GET form, so the list is
           shareable by URL and needs no client-side state. */}
-      <div className="mt-8 flex max-w-3xl flex-wrap items-center gap-3">
+      <div className="mt-8 flex flex-wrap items-center gap-3">
         {tabs.map(([value, label]) => {
           const href = `/admin?status=${value}${q ? `&q=${encodeURIComponent(q)}` : ""}`;
           const active = status === value;
@@ -152,7 +152,7 @@ export default async function Admin({
           {orders.map((o) => (
             <article
               key={o.id}
-              className="max-w-3xl rounded-xl border border-ink/20 p-6 font-body"
+              className="rounded-xl border border-ink/20 p-6 font-body"
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <span className="font-bold">
