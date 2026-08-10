@@ -10,7 +10,14 @@ import { ProductRow } from "@/components/ProductRow";
  *   the PDF's nominal size. Archivo and TT Commons match within 0.7%.
  * - Line pitch is perfectly uniform in all three blocks, so the copy has no
  *   paragraph gaps — it's one block with hard line breaks.
+ *
+ * Taglines are ONE shared size (TAG_SIZE below), not per-item: Catchye has
+ * only one weight, so at a smaller size a short tagline reads visibly
+ * chunkier than a longer one at a larger size — a hinting artifact, not a
+ * real weight difference. A single size keeps all three reading the same.
  */
+const TAG_SIZE = "md:text-[clamp(0px,6.3vw,95.2px)]";
+
 const items = [
   {
     name: "slick",
@@ -20,7 +27,6 @@ const items = [
     made: "md:text-[clamp(0px,5.59vw,84.5px)]",
     script: "md:text-[clamp(0px,6.73vw,101.8px)]",
     sub: "md:text-[clamp(0px,2.23vw,33.7px)]",
-    tag: "md:text-[clamp(0px,3.87vw,58.5px)]",
     cart: "md:text-[clamp(0px,1.46vw,22.1px)]",
     aspect: "aspect-[0.738]",
     size: [843, 1143],
@@ -43,7 +49,6 @@ const items = [
     made: "md:text-[clamp(0px,5.69vw,86px)]",
     script: "md:text-[clamp(0px,6.48vw,98px)]",
     sub: "md:text-[clamp(0px,2.22vw,33.6px)]",
-    tag: "md:text-[clamp(0px,3.64vw,55px)]",
     cart: "md:text-[clamp(0px,1.46vw,22.1px)]",
     aspect: "aspect-[0.803]",
     size: [976, 1216],
@@ -68,7 +73,6 @@ const items = [
     made: "md:text-[clamp(0px,5.55vw,83.9px)]",
     script: "md:text-[clamp(0px,6.06vw,91.6px)]",
     sub: "md:text-[clamp(0px,2.18vw,33px)]",
-    tag: "md:text-[clamp(0px,3.62vw,54.7px)]",
     cart: "md:text-[clamp(0px,1.52vw,23px)]",
     aspect: "aspect-[0.818]",
     size: [885, 1082],
@@ -163,7 +167,7 @@ export default function Shop() {
             </div>
 
             <div>
-              <p className={`font-script text-4xl ${item.tag}`}>
+              <p className={`font-script text-4xl ${TAG_SIZE}`}>
                 {item.tagline}
               </p>
               {/* The design sets this in the display face, not Archivo, and
