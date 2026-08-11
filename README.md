@@ -22,9 +22,13 @@ file, never from the request body.
 There is no payment step: orders are recorded and emailed, and the checkout
 says so. Wire a payment provider into `/api/orders` when there is one.
 
-`/admin` lists orders behind HTTP Basic Auth (`src/proxy.ts`). Set
+`/admin` lists orders behind a sign-in page at `/admin/login`. Set
 `ADMIN_USER` and `ADMIN_PASSWORD` alongside `DATABASE_URL`, locally and in
-Vercel. For the order email set `RESEND_API_KEY` and `FROM_EMAIL`; `ADMIN_EMAIL`
+Vercel. The session is a signed cookie (`src/lib/auth.ts`) — no session
+store, since there is one admin — and `ADMIN_PASSWORD` is the signing key,
+so changing it signs every existing session out. Sessions last 7 days.
+
+For the order email set `RESEND_API_KEY` and `FROM_EMAIL`; `ADMIN_EMAIL`
 defaults to `ashna@credminds.com`. Without the key or sender, orders still
 save and the miss is logged.
 

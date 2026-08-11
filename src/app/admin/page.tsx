@@ -3,6 +3,7 @@ import { Wordmark } from "@/components/Logo";
 import { money } from "@/lib/products";
 import { isStatus, listOrders, orderTotals, type Order } from "@/lib/orders";
 import { updateStatus } from "./actions";
+import { logout } from "./login/actions";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Orders — MADE.line admin" };
@@ -39,6 +40,14 @@ function Shell({ children }: { children: React.ReactNode }) {
     <main className="mx-auto w-full max-w-3xl px-6 py-12">
       <Wordmark className="mx-auto h-8" />
       <h1 className="mt-8 text-center font-display text-3xl uppercase">Orders</h1>
+      <form action={logout} className="mt-3 text-center">
+        <button
+          className="font-body text-sm text-ink/60 underline hover:text-ink"
+          type="submit"
+        >
+          Sign out
+        </button>
+      </form>
       {children}
     </main>
   );

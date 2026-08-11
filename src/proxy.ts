@@ -1,25 +1,29 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { SESSION_COOKIE, isValidSession } from "@/lib/auth";
 
-// ponytail: HTTP Basic Auth, not a real login — fine for a one-person admin
-// view. Move to a proper auth provider if more than the owner needs access.
-export function proxy(request: NextRequest) {
-  const user = process.env.ADMIN_USER;
-  const pass = process.env.ADMIN_PASSWORD;
-  if (!user || !pass) {
-    return new NextResponse("Admin access is not configured.", {
-      status: 503,
-    });
+// ponytail: one signed cookie, no session store and no auth provider — there
+// is a single admin. Swap for a real provider if more people need access.
+export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // The login page has to stay reachable, or signing in is impossible.
+  if (pathname === "/admin/login") return NextResponse.next();
+
+  const secret = process.env.ADMIN_PASSWORD;
+  if (!process.env.ADMIN_USER || !secret) {
+    return new NextResponse("Admin access is not configured.", { status: 503 });
   }
 
-  const auth = request.headers.get("authorization");
-  const expected = "Basic " + Buffer.from(`${user}:${pass}`).toString("base64");
-  if (auth === expected) return NextResponse.next();
+  const token = request.cookies.get(SESSION_COOKIE)?.value;
+  if (token && (await isValidSession(token, secret))) {
+    return NextResponse.next();
+  }
 
-  return new NextResponse("Authentication required.", {
-    status: 401,
-    headers: { "WWW-Authenticate": 'Basic realm="Admin"' },
-  });
+  const url = request.nextUrl.clone();
+  url.pathname = "/admin/login";
+  url.search = pathname === "/admin" ? "" : `?next=${encodeURIComponent(pathname)}`;
+  return NextResponse.redirect(url);
 }
 
 export const config = {
