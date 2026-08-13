@@ -96,7 +96,15 @@ export default function Contact() {
               placeholder="Email*"
               required
             />
-            <select className={field} name="reason" required defaultValue="">
+            {/* appearance-none so it matches the inputs: a native select ignores
+                the padding they use and draws the OS control, which rendered
+                it visibly shorter. The chevron is drawn back on. */}
+            <select
+              className={`${field} appearance-none bg-[length:1.1em] bg-[right_1.5rem_center] bg-no-repeat pr-14 [background-image:url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2016%2016%27%20fill=%27none%27%20stroke=%27%234a2313%27%20stroke-width=%271.5%27%3E%3Cpath%20d=%27M4%206l4%204%204-4%27/%3E%3C/svg%3E")]`}
+              name="reason"
+              required
+              defaultValue=""
+            >
               <option value="" disabled>
                 Contact Reason*
               </option>
