@@ -4,7 +4,6 @@ const LIMITS = {
   name: 200,
   email: 320,
   reason: 100,
-  topic: 200,
   details: 5000,
 } as const;
 
@@ -13,17 +12,23 @@ const LIMITS = {
 let ready: Promise<unknown> | null = null;
 function ensureTable() {
   const sql = db();
-  ready ??= sql`
-    CREATE TABLE IF NOT EXISTS contact_messages (
-      id         bigserial PRIMARY KEY,
-      name       text        NOT NULL,
-      email      text        NOT NULL,
-      reason     text        NOT NULL,
-      topic      text        NOT NULL,
-      details    text        NOT NULL,
-      attachments text,
-      created_at timestamptz NOT NULL DEFAULT now()
-    )`;
+  ready ??= (async () => {
+    await sql`
+      CREATE TABLE IF NOT EXISTS contact_messages (
+        id         bigserial PRIMARY KEY,
+        name       text        NOT NULL,
+        email      text        NOT NULL,
+        reason     text        NOT NULL,
+        topic      text,
+        details    text        NOT NULL,
+        attachments text,
+        created_at timestamptz NOT NULL DEFAULT now()
+      )`;
+    // The design dropped the Topic field. CREATE TABLE IF NOT EXISTS won't
+    // touch a table that already exists, so a database created before this
+    // still has topic NOT NULL and every insert would fail on it.
+    await sql`ALTER TABLE contact_messages ALTER COLUMN topic DROP NOT NULL`;
+  })();
   return ready;
 }
 
@@ -69,9 +74,9 @@ export async function POST(request: Request) {
   try {
     await ensureTable();
     await db()`
-      INSERT INTO contact_messages (name, email, reason, topic, details, attachments)
+      INSERT INTO contact_messages (name, email, reason, details, attachments)
       VALUES (${result.name}, ${result.email}, ${result.reason},
-              ${result.topic}, ${result.details}, ${result.attachments ?? null})`;
+              ${result.details}, ${result.attachments ?? null})`;
   } catch (error) {
     console.error("contact insert failed", error);
     return Response.json({ error: "Could not save message" }, { status: 500 });

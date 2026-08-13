@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Monogram } from "@/components/Logo";
 
 const reasons = [
   "Order support",
@@ -12,7 +13,15 @@ const reasons = [
 ];
 
 const field =
-  "w-full rounded-xl bg-white px-6 py-5 text-base text-ink placeholder:text-ink/50 outline-none focus:ring-2 focus:ring-ink/30";
+  "w-full rounded-2xl bg-white px-6 py-4 font-body text-ink placeholder:text-ink/45 outline-none focus:ring-2 focus:ring-ink/20 md:text-[1.65vw] md:leading-none";
+
+/**
+ * Sizes are percentages of the design page's width, read from its PDF.
+ * Catchye sits small and narrow on the em compared with the cut the design
+ * used, so the script words carry tracking and a light stroke to match — the
+ * same treatment as the shop taglines.
+ */
+const SCRIPT = "font-script [-webkit-text-stroke:0.0324em_var(--color-ink)]";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
@@ -20,33 +29,30 @@ export default function Contact() {
   const [error, setError] = useState("");
 
   return (
-    // Sits in a rounded card inset from the page edge, like the hero.
-    <div className="p-2 md:px-[2vw] md:py-[1vw]">
-      <div className="rounded-2xl bg-cream px-6 py-20 md:px-10 md:py-28">
-        <div className="mx-auto max-w-[760px]">
-        <h1 className="text-5xl font-bold md:text-6xl">contact us</h1>
+    <div data-bg="cream">
+      <div className="mx-auto max-w-[900px] px-6 py-16 md:py-[6vw]">
+        <h1 className="text-center leading-none">
+          <span className="font-display text-[11vw] uppercase md:text-[6.4vw]">
+            Contact
+          </span>{" "}
+          <span className={`${SCRIPT} text-[11.5vw] md:text-[6.68vw] md:tracking-[0.116em]`}>
+            us
+          </span>
+        </h1>
 
-        <div className="mt-8 space-y-5 text-lg leading-relaxed">
-          <p>
-            Feel free to reach out at any time. We&apos;re here to help with
-            orders, product questions, and any feedback you may have.
-          </p>
-          <p>
-            Our team can assist by email Monday through Friday, 9am to 5pm
-            (excluding holidays). We&apos;ll aim to get back to you within 2
-            business days.
-          </p>
-          <p className="text-base text-ink/70">* indicates a required field</p>
-        </div>
+        <p className="mx-auto mt-6 max-w-[46ch] text-center font-body leading-[1.45] md:mt-[2.5vw] md:text-[1.65vw]">
+          Have a question about MADE.line, your order, or a product? Fill out
+          the form below and we&apos;ll get back to you as soon as possible.
+        </p>
 
         {sent ? (
-          <p className="mt-12 rounded-xl bg-white px-6 py-8 text-lg font-bold">
-            Thanks — we&apos;ve got your message and will be in touch within 2
-            business days.
+          <p className="mt-12 rounded-2xl bg-white px-6 py-8 font-body text-lg">
+            Thanks — we&apos;ve got your message and will be in touch as soon as
+            possible.
           </p>
         ) : (
           <form
-            className="mt-12 space-y-4"
+            className="mt-10 space-y-4 md:mt-[3.5vw]"
             onSubmit={async (e) => {
               e.preventDefault();
               setError("");
@@ -98,25 +104,19 @@ export default function Contact() {
                 <option key={r}>{r}</option>
               ))}
             </select>
-            <input
-              className={field}
-              name="topic"
-              placeholder="Topic*"
-              required
-            />
             <textarea
-              className={`${field} min-h-[260px] resize-y`}
+              className={`${field} min-h-[240px] resize-y md:leading-[1.45]`}
               name="details"
               placeholder="Tell us the details.*"
               required
             />
 
             <div className="pt-4">
-              <p className="mb-3 text-sm text-ink/70">
+              <p className="mb-3 font-body text-sm text-ink/60">
                 Optional: 10 files max, total file size under 50MB
               </p>
               <input
-                className={`${field} file:mr-4 file:rounded-full file:border-0 file:bg-ink file:px-5 file:py-2 file:text-sm file:font-bold file:text-cream`}
+                className={`${field} file:mr-4 file:rounded-full file:border-0 file:bg-ink file:px-5 file:py-2 file:font-body file:text-sm file:text-cream`}
                 type="file"
                 name="files"
                 multiple
@@ -125,13 +125,16 @@ export default function Contact() {
             </div>
 
             {error && (
-              <p className="rounded-xl bg-white px-6 py-4 font-bold text-red-700">
+              <p
+                role="alert"
+                className="rounded-2xl bg-white px-6 py-4 font-body font-bold text-red-700"
+              >
                 {error}
               </p>
             )}
 
             <button
-              className="mt-6 w-full rounded-full border-2 border-ink py-5 text-base font-bold uppercase tracking-[0.15em] hover:bg-ink hover:text-cream disabled:opacity-50"
+              className="mt-4 w-full rounded-full border-2 border-ink py-4 font-body text-sm font-bold uppercase tracking-[0.25em] disabled:opacity-50 md:py-[1.1vw]"
               type="submit"
               disabled={sending}
             >
@@ -139,7 +142,13 @@ export default function Contact() {
             </button>
           </form>
         )}
-        </div>
+
+        <p
+          className={`${SCRIPT} mt-16 text-center text-[8vw] md:mt-[5vw] md:text-[3.28vw] md:tracking-[0.09em]`}
+        >
+          Let Talk Hair!
+        </p>
+        <Monogram className="mx-auto mt-8 h-[14vw] md:mt-[3vw] md:h-[6.24vw]" />
       </div>
     </div>
   );
