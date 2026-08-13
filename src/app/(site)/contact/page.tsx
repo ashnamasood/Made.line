@@ -13,7 +13,7 @@ const reasons = [
 ];
 
 const field =
-  "w-full rounded-2xl bg-white px-6 py-4 font-body text-ink placeholder:text-ink/45 outline-none focus:ring-2 focus:ring-ink/20 md:text-[1.65vw] md:leading-none";
+  "w-full rounded-2xl bg-white px-6 py-4 font-body text-ink placeholder:text-ink/45 outline-none focus:ring-2 focus:ring-ink/20 md:text-[1.24vw] md:leading-none";
 
 /**
  * Sizes are percentages of the design page's width, read from its PDF.
@@ -40,7 +40,7 @@ export default function Contact() {
           </span>
         </h1>
 
-        <p className="mx-auto mt-6 max-w-[46ch] text-center font-body leading-[1.45] md:mt-[2.5vw] md:text-[1.65vw]">
+        <p className="mx-auto mt-6 max-w-[46ch] text-center font-body font-medium leading-[1.45] md:mt-[2.5vw] md:text-[1.65vw]">
           Have a question about MADE.line, your order, or a product? Fill out
           the form below and we&apos;ll get back to you as soon as possible.
         </p>
@@ -134,7 +134,7 @@ export default function Contact() {
             )}
 
             <button
-              className="mt-4 w-full rounded-full border-2 border-ink py-4 font-body text-sm font-bold uppercase tracking-[0.25em] disabled:opacity-50 md:py-[1.1vw]"
+              className="mt-4 w-full rounded-full border-2 border-ink py-4 font-body text-sm font-bold uppercase tracking-[0.25em] disabled:opacity-50 md:py-[1.1vw] md:text-[1.24vw]"
               type="submit"
               disabled={sending}
             >
