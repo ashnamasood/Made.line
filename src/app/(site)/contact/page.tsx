@@ -32,17 +32,19 @@ export default function Contact() {
     <div data-bg="cream">
       <div className="mx-auto max-w-[900px] px-6 py-16 md:py-[6vw]">
         <h1 className="text-center leading-none">
-          <span className="font-display text-[11vw] uppercase md:text-[6.4vw]">
+          <span className="font-display text-[clamp(2.5rem,11vw,4.5rem)] uppercase md:text-[6.4vw]">
             Contact
           </span>{" "}
-          <span className={`${SCRIPT} text-[11.5vw] md:text-[6.68vw] md:tracking-[0.116em]`}>
-            us
+          <span className={`${SCRIPT} text-[clamp(2.6rem,11.5vw,4.7rem)] md:text-[6.68vw] md:tracking-[0.116em]`}>
+            US
           </span>
         </h1>
 
-        <p className="mx-auto mt-6 max-w-[46ch] text-center font-body font-medium leading-[1.45] md:mt-[2.5vw] md:text-[1.65vw]">
+        <p className="mx-auto mt-6 text-center font-body font-medium leading-[1.45] md:mt-[2.5vw] md:text-[1.65vw]">
           Have a question about MADE.line, your order, or a product? Fill out
-          the form below and we&apos;ll get back to you as soon as possible.
+          the
+          <br className="max-md:hidden" />
+          form below and we&apos;ll get back to you as soon as possible.
         </p>
 
         {sent ? (
