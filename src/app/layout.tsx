@@ -42,9 +42,21 @@ const alteHaas = localFont({
   display: "swap",
 });
 
+// metadataBase makes og:image absolute, which link previews require. Point it
+// at the real domain once the site leaves the Vercel subdomain.
+// icon.png, apple-icon.png and opengraph-image.jpg sit next to this file, and
+// Next wires them into <head> on its own — the M. monogram on brand periwinkle.
 export const metadata: Metadata = {
+  metadataBase: new URL("https://made-line.vercel.app"),
   title: "MADE.line",
   description: "Created for effortless touchups anytime.",
+  openGraph: {
+    title: "MADE.line",
+    description: "Created for effortless touchups anytime.",
+    url: "/",
+    siteName: "MADE.line",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
