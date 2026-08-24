@@ -4,7 +4,6 @@ import { Wordmark } from "./Logo";
 const navigate = [
   ["Our Story", "/our-story"],
   ["Shop", "/shop"],
-  ["Community", "/community"],
   ["FAQs", "/faqs"],
   ["Contact", "/contact"],
 ];
