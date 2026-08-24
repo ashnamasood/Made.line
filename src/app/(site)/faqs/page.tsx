@@ -148,19 +148,27 @@ const rail = [...groups.map(({ id, title }) => ({ id, title })), { id: "contact-
 export default function Faqs() {
   return (
     <div data-bg="cream">
-      {/* Same gutter and radius as the other page-top cards. The heading is
-          burned into the artwork the client supplied, so the real <h1> rides
-          along for screen readers and search. */}
+      {/* Same gutter and radius as the other page-top cards. The source is a
+          portrait shot, so the container does the cropping: near-square on
+          phones, a wide banner from md up. The 22% offset keeps the crown off
+          the top edge while holding the hair waves in frame. */}
       <section className="p-2 md:px-[2vw] md:pb-[1vw] md:pt-[1vw]">
-        <h1 className="sr-only">Frequently Asked Questions</h1>
-        <Image
-          src="/images/faq-hero.jpg"
-          alt="You got any questions?"
-          width={1300}
-          height={664}
-          priority
-          className="w-full rounded-2xl"
-        />
+        <div className="relative aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[4/3] md:aspect-[16/9]">
+          <Image
+            src="/images/faq-hero.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover object-[50%_22%]"
+          />
+          {/* The photo runs light-grey to dark-brown, so white type needs a
+              floor under it. Scrim only, no colour cast. */}
+          <div className="absolute inset-0 bg-black/15" />
+          <h1 className="absolute inset-0 grid place-items-center px-6 text-center font-sans text-[clamp(1.75rem,7vw,3rem)] font-bold leading-tight text-white md:text-[3.6vw]">
+            You Got Any Questions?
+          </h1>
+        </div>
       </section>
 
       <p className="mx-auto max-w-[56ch] px-6 pb-6 pt-6 text-center font-body font-medium leading-[1.45] md:pb-[1.8vw] md:pt-[1.6vw] md:text-[1.35vw]">
