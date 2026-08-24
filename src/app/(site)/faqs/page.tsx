@@ -148,20 +148,19 @@ const rail = [...groups.map(({ id, title }) => ({ id, title })), { id: "contact-
 export default function Faqs() {
   return (
     <div data-bg="cream">
-      {/* Same gutter and radius as the other page-top cards. The banner is
-          wider than the photo, so the container crops top and bottom; the 10%
-          offset keeps the crown in frame and lets the sweater run off the
-          bottom, the way the design does it. Taller ratios on phones so the
-          face doesn't get squeezed out. */}
+      {/* Same gutter and radius as the other page-top cards. 1300/664 is the
+          design's banner ratio, which is wider than the photo — anchoring to
+          the top keeps the crown and face, and the sweater is what runs off
+          the bottom. Taller ratios on phones so the face isn't squeezed out. */}
       <section className="p-2 md:px-[2vw] md:pb-[1vw] md:pt-[1vw]">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl sm:aspect-[3/2] md:aspect-[16/9]">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl sm:aspect-[3/2] md:aspect-[1300/664]">
           <Image
             src="/images/faqs-hero.jpg"
             alt=""
             fill
             sizes="100vw"
             priority
-            className="object-cover object-[50%_10%]"
+            className="object-cover object-top"
           />
           {/* The photo runs light-grey to dark-brown, so white type needs a
               floor under it. Scrim only, no colour cast. */}
