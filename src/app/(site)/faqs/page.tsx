@@ -160,7 +160,7 @@ export default function Faqs() {
             fill
             sizes="100vw"
             priority
-            className="object-cover object-top"
+            className="object-cover object-[50%_10%]"
           />
           {/* The photo runs light-grey to dark-brown, so white type needs a
               floor under it. Scrim only, no colour cast. */}
