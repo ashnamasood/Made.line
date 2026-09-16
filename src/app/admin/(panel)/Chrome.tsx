@@ -10,7 +10,7 @@ import { Icon, type IconName } from "./Icon";
 const menu: [href: string, label: string, icon: IconName][] = [
   ["/admin", "Dashboard", "dashboard"],
   ["/admin/orders", "Orders", "orders"],
-  ["/admin/messages", "Messages", "messages"],
+  ["/admin/messages", "Contact Form", "messages"],
   ["/admin/products", "Products", "products"],
 ];
 

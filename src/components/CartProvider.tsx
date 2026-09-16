@@ -7,11 +7,13 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { PRODUCTS, isProductId, type ProductId } from "@/lib/products";
+import { isProductId, type Catalog, type ProductId } from "@/lib/products";
 
 export type CartLine = { id: ProductId; qty: number };
 
 type CartState = {
+  /** Live names, prices and stock, fetched on the server by the root layout. */
+  catalog: Catalog;
   lines: CartLine[];
   open: boolean;
   count: number;
@@ -31,7 +33,13 @@ export function useCart() {
   return ctx;
 }
 
-export function CartProvider({ children }: { children: ReactNode }) {
+export function CartProvider({
+  catalog,
+  children,
+}: {
+  catalog: Catalog;
+  children: ReactNode;
+}) {
   const [lines, setLines] = useState<CartLine[]>([]);
   const [open, setOpen] = useState(false);
 
@@ -78,13 +86,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const count = lines.reduce((n, l) => n + l.qty, 0);
   const subtotal = lines.reduce(
-    (n, l) => n + PRODUCTS[l.id].price * l.qty,
+    (n, l) => n + catalog[l.id].price * l.qty,
     0,
   );
 
   return (
     <Cart.Provider
       value={{
+        catalog,
         lines,
         open,
         count,

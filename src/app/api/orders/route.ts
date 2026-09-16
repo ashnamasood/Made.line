@@ -1,7 +1,8 @@
+import { readCatalog } from "@/lib/catalog";
 import { db } from "@/lib/db";
 import { sendAdminEmail } from "@/lib/email";
 import { ensureOrdersSchema } from "@/lib/orders";
-import { PRODUCTS, isProductId, money, type ProductId } from "@/lib/products";
+import { isProductId, money, type ProductId } from "@/lib/products";
 
 const FIELDS = {
   email: { max: 320, required: true },
@@ -61,22 +62,37 @@ export async function POST(request: Request) {
   if (parsed.error) return Response.json({ error: parsed.error }, { status: 400 });
   const { out, lines } = parsed as { out: Record<string, string>; lines: Line[] };
 
-  // Priced server-side from our own catalogue — never from the request body,
-  // so a tampered payload can't set its own total.
-  const items = lines.map((l) => ({
-    id: l.id,
-    qty: l.qty,
-    title: PRODUCTS[l.id].title,
-    unit_price: PRODUCTS[l.id].price,
-  }));
-  const subtotal = items.reduce((n, i) => n + i.unit_price * i.qty, 0);
-
   if (!process.env.DATABASE_URL) {
     return Response.json(
       { error: "Ordering is not connected to a database yet." },
       { status: 503 },
     );
   }
+
+  // Priced server-side from the live catalogue — never from the request body,
+  // so a tampered payload can't set its own total. Read fresh, not from the
+  // storefront cache, so an order never goes through at an old price.
+  let catalog;
+  try {
+    catalog = await readCatalog();
+  } catch (error) {
+    console.error("catalog read failed", error);
+    return Response.json({ error: "Could not place order" }, { status: 500 });
+  }
+  const soldOut = lines.find((l) => !catalog[l.id].active);
+  if (soldOut) {
+    return Response.json(
+      { error: `MADE.${soldOut.id} is sold out — remove it from your cart to continue.` },
+      { status: 409 },
+    );
+  }
+  const items = lines.map((l) => ({
+    id: l.id,
+    qty: l.qty,
+    title: catalog[l.id].title,
+    unit_price: catalog[l.id].price,
+  }));
+  const subtotal = items.reduce((n, i) => n + i.unit_price * i.qty, 0);
 
   let orderId: number;
   try {

@@ -10,17 +10,19 @@ export function AddToCart({
   product: ProductId;
   className: string;
 }) {
-  const { add, setOpen } = useCart();
+  const { add, setOpen, catalog } = useCart();
+  const soldOut = !catalog[product].active;
   return (
     <button
-      className={className}
+      className={`${className} disabled:cursor-not-allowed disabled:opacity-50`}
       type="button"
+      disabled={soldOut}
       onClick={() => {
         add(product);
         setOpen(true);
       }}
     >
-      Add to Cart
+      {soldOut ? "Sold Out" : "Add to Cart"}
     </button>
   );
 }

@@ -105,3 +105,38 @@ export async function recentOrders(limit: number) {
     SELECT * FROM orders ORDER BY created_at DESC LIMIT ${limit}`;
   return rows as Order[];
 }
+
+/**
+ * Revenue and order count for each of the last `days` days, oldest first,
+ * bucketed by the Adelaide calendar day. Days with no orders come back as 0.
+ */
+export async function salesByDay(days: number) {
+  await ensureOrdersSchema();
+  const rows = (await db()`
+    WITH span AS (
+      SELECT generate_series(
+        (now() AT TIME ZONE 'Australia/Adelaide')::date - (${days}::int - 1),
+        (now() AT TIME ZONE 'Australia/Adelaide')::date,
+        interval '1 day'
+      )::date AS day
+    )
+    SELECT to_char(span.day, 'YYYY-MM-DD') AS day,
+           coalesce(sum(o.subtotal), 0)::int AS revenue,
+           count(o.id)::int AS orders
+    FROM span
+    LEFT JOIN orders o
+      ON (o.created_at AT TIME ZONE 'Australia/Adelaide')::date = span.day
+    GROUP BY span.day
+    ORDER BY span.day`) as { day: string; revenue: number; orders: number }[];
+  return rows;
+}
+
+/** Units sold per product id, across every order. */
+export async function unitsByProduct() {
+  await ensureOrdersSchema();
+  const rows = (await db()`
+    SELECT item->>'id' AS id, sum((item->>'qty')::int)::int AS units
+    FROM orders, jsonb_array_elements(items) AS item
+    GROUP BY 1`) as { id: string; units: number }[];
+  return rows;
+}

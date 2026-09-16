@@ -5,13 +5,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/components/CartProvider";
 import { Wordmark } from "@/components/Logo";
-import { PRODUCTS, money } from "@/lib/products";
+import { money } from "@/lib/products";
 
 const field =
   "w-full rounded-lg border border-ink/30 bg-white px-4 py-3 font-body text-ink outline-none focus:border-ink";
 
 export default function Checkout() {
-  const { lines, count, subtotal, clear } = useCart();
+  const { catalog, lines, count, subtotal, clear } = useCart();
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [placed, setPlaced] = useState<string | null>(null);
@@ -170,11 +170,14 @@ export default function Checkout() {
             <div className="flex-1">
               <p className="font-display uppercase">MADE.{line.id}</p>
               <p className="font-body text-sm text-ink/70">
-                {PRODUCTS[line.id].title}
+                {catalog[line.id].title}
               </p>
+              {!catalog[line.id].active && (
+                <p className="font-body text-sm font-bold text-red-700">Sold out</p>
+              )}
             </div>
             <span className="font-body font-bold">
-              {money(PRODUCTS[line.id].price * line.qty)}
+              {money(catalog[line.id].price * line.qty)}
             </span>
           </div>
         ))}

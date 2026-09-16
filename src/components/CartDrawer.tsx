@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "./CartProvider";
-import { PRODUCTS, money } from "@/lib/products";
+import { money } from "@/lib/products";
 
 function Stepper({
   qty,
@@ -36,7 +36,7 @@ function Stepper({
 }
 
 export function CartDrawer() {
-  const { lines, open, count, subtotal, setQty, setOpen } = useCart();
+  const { catalog, lines, open, count, subtotal, setQty, setOpen } = useCart();
 
   return (
     <>
@@ -90,12 +90,17 @@ export function CartDrawer() {
                       MADE.{line.id}
                     </span>
                     <span className="font-body font-bold">
-                      {money(PRODUCTS[line.id].price * line.qty)}
+                      {money(catalog[line.id].price * line.qty)}
                     </span>
                   </div>
                   <p className="font-body text-sm text-ink/70">
-                    {PRODUCTS[line.id].title}
+                    {catalog[line.id].title}
                   </p>
+                  {!catalog[line.id].active && (
+                    <p className="font-body text-sm font-bold text-red-700">
+                      Sold out — remove to check out
+                    </p>
+                  )}
                   <Stepper
                     qty={line.qty}
                     onChange={(n) => setQty(line.id, n)}

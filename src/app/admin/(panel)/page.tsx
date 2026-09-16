@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { messageCount, recentMessages } from "@/lib/contact";
-import { orderTotals, recentOrders } from "@/lib/orders";
-import { PRODUCTS, money } from "@/lib/products";
+import { readCatalog } from "@/lib/catalog";
+import { messageTotals, recentMessages } from "@/lib/contact";
+import { orderTotals, recentOrders, salesByDay, unitsByProduct } from "@/lib/orders";
+import { PRODUCT_IDS, money } from "@/lib/products";
+import { RevenueChart, UnitsChart } from "./Charts";
 import {
   Card,
   DbProblem,
@@ -17,13 +19,16 @@ export const metadata: Metadata = { title: "Dashboard — MADE.line admin" };
 
 export default async function Dashboard() {
   const data = await loadFromDb("dashboard", async () => {
-    const [totals, messages, orders, latest] = await Promise.all([
+    const [totals, messages, orders, latest, sales, units, catalog] = await Promise.all([
       orderTotals(),
-      messageCount(),
+      messageTotals(),
       recentOrders(5),
       recentMessages(5),
+      salesByDay(30),
+      unitsByProduct(),
+      readCatalog(),
     ]);
-    return { totals, messages, orders, latest };
+    return { totals, messages, orders, latest, sales, units, catalog };
   });
 
   return (
@@ -64,21 +69,35 @@ export default async function Dashboard() {
               note="Subtotal of every order"
             />
             <StatCard
-              href="/admin/messages"
+              href="/admin/messages?status=new"
               icon="messages"
               tint="blush"
-              label="Messages"
-              value={String(data.value.messages)}
-              note="Contact form enquiries"
+              label="Contact form"
+              value={String(data.value.messages.total)}
+              note={`${data.value.messages.unread} new, not yet replied`}
             />
             <StatCard
               href="/admin/products"
               icon="products"
               tint="peri"
               label="Products"
-              value={String(Object.keys(PRODUCTS).length)}
-              note="In the shop"
+              value={String(PRODUCT_IDS.length)}
+              note={soldOutNote(PRODUCT_IDS.filter((id) => !data.value.catalog[id].active).length)}
             />
+          </div>
+
+          <div className="grid gap-6 xl:grid-cols-3">
+            <Card title="Revenue, last 30 days" className="xl:col-span-2">
+              <RevenueChart data={data.value.sales} />
+            </Card>
+            <Card title="Units sold by product">
+              <UnitsChart
+                rows={PRODUCT_IDS.map((id) => ({
+                  label: `MADE.${id}`,
+                  units: data.value.units.find((u) => u.id === id)?.units ?? 0,
+                }))}
+              />
+            </Card>
           </div>
 
           <div className="grid gap-6 xl:grid-cols-2">
@@ -115,7 +134,7 @@ export default async function Dashboard() {
             </Card>
 
             <Card
-              title="Recent messages"
+              title="Latest contact form messages"
               action={<ViewAll href="/admin/messages" />}
             >
               {data.value.latest.length === 0 ? (
@@ -148,3 +167,6 @@ function ViewAll({ href }: { href: string }) {
     </Link>
   );
 }
+
+const soldOutNote = (n: number) =>
+  n === 0 ? "All in stock" : `${n} sold out`;

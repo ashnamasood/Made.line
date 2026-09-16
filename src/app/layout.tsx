@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { CartDrawer } from "@/components/CartDrawer";
 import { CartProvider } from "@/components/CartProvider";
+import { getCatalog } from "@/lib/catalog";
 import "./globals.css";
 
 // The design's own faces: TT Commons Pro Black sets "MADE." and Catchye the
@@ -59,18 +60,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Cached and tagged, so this doesn't make every page query the database.
+  const catalog = await getCatalog();
   return (
     <html
       lang="en"
       className={`${ttCommons.variable} ${catchye.variable} ${alteHaas.variable} ${archivo.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <CartProvider>
+        <CartProvider catalog={catalog}>
           {children}
           <CartDrawer />
         </CartProvider>
