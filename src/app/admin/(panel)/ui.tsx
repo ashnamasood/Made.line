@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Icon, type IconName } from "./Icon";
+import { Icon, type IconName } from "../_shared/Icon";
 
 export function PageHeader({ title }: { title: string }) {
   return (

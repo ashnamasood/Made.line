@@ -1,15 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getCatalog } from "@/lib/catalog";
+import { packshot, type ProductId } from "@/lib/products";
 
 // Backdrops are near-identical creams in the design, not product-colour tints.
-export const products = [
+export const products: { name: ProductId; tint: string }[] = [
   { name: "slick", tint: "bg-[#f8f3e7]" },
   { name: "fresh", tint: "bg-[#f7f1e3]" },
   { name: "even", tint: "bg-[#f3ede2]" },
 ];
 
 /** The three-up product row, shared by the home and shop pages. */
-export function ProductRow() {
+export async function ProductRow() {
+  const catalog = await getCatalog();
   return (
     <section className="grid md:grid-cols-3">
       {products.map((p, i) => {
@@ -29,7 +32,7 @@ export function ProductRow() {
               }`}
             >
               <Image
-                src={`/products/${p.name}.jpg`}
+                src={packshot(p.name, catalog[p.name])}
                 alt={`MADE.${p.name}`}
                 width={706}
                 height={941}

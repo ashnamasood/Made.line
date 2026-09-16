@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { LinePrice } from "./LinePrice";
 import { useCart } from "./CartProvider";
-import { money } from "@/lib/products";
+import { money, packshot } from "@/lib/products";
 
 function Stepper({
   qty,
@@ -78,7 +79,7 @@ export function CartDrawer() {
                 className="flex gap-4 border-t border-ink/15 py-6"
               >
                 <Image
-                  src={`/products/${line.id}.jpg`}
+                  src={packshot(line.id, catalog[line.id])}
                   alt=""
                   width={706}
                   height={941}
@@ -90,7 +91,7 @@ export function CartDrawer() {
                       MADE.{line.id}
                     </span>
                     <span className="font-body font-bold">
-                      {money(catalog[line.id].price * line.qty)}
+                      <LinePrice info={catalog[line.id]} qty={line.qty} />
                     </span>
                   </div>
                   <p className="font-body text-sm text-ink/70">

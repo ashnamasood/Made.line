@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { isProductId, type Catalog, type ProductId } from "@/lib/products";
+import { isProductId, salePrice, type Catalog, type ProductId } from "@/lib/products";
 
 export type CartLine = { id: ProductId; qty: number };
 
@@ -86,7 +86,7 @@ export function CartProvider({
 
   const count = lines.reduce((n, l) => n + l.qty, 0);
   const subtotal = lines.reduce(
-    (n, l) => n + catalog[l.id].price * l.qty,
+    (n, l) => n + salePrice(catalog[l.id]) * l.qty,
     0,
   );
 

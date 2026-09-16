@@ -3,8 +3,8 @@ export const SESSION_DAYS = 7;
 
 /**
  * Signed-cookie sessions — no session store to keep, since there is exactly
- * one admin. The signing key is ADMIN_PASSWORD, so changing the password
- * invalidates every existing session, which is the behaviour you want.
+ * one admin. The signing key comes from sessionSecret() in account.ts, which
+ * changes with the password, so a password change signs every session out.
  */
 const enc = new TextEncoder();
 
@@ -23,7 +23,7 @@ async function sign(payload: string, secret: string) {
 }
 
 /** Constant-time, so a wrong value can't be narrowed by response timing. */
-function timingSafeEqual(a: string, b: string) {
+export function timingSafeEqual(a: string, b: string) {
   if (a.length !== b.length) return false;
   let diff = 0;
   for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
@@ -42,11 +42,4 @@ export async function isValidSession(token: string, secret: string) {
   const signature = token.slice(dot + 1);
   if (!/^\d+$/.test(expires) || Number(expires) < Date.now()) return false;
   return timingSafeEqual(signature, await sign(expires, secret));
-}
-
-/** Compares credentials without leaking which field was wrong via timing. */
-export function credentialsMatch(user: string, password: string) {
-  const okUser = timingSafeEqual(user, process.env.ADMIN_USER ?? "");
-  const okPass = timingSafeEqual(password, process.env.ADMIN_PASSWORD ?? "");
-  return okUser && okPass;
 }

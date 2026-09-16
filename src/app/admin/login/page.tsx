@@ -1,79 +1,51 @@
-"use client";
-
-import { useActionState } from "react";
-import { useSearchParams } from "next/navigation";
+import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Wordmark } from "@/components/Logo";
-import { login, type LoginState } from "./actions";
+import { Monogram, Wordmark } from "@/components/Logo";
+import { ThemeToggle } from "../_shared/ThemeToggle";
+import { isDarkTheme } from "../_shared/theme";
+import { LoginForm } from "./LoginForm";
 
-const field =
-  "w-full rounded-lg border border-ink/30 bg-white px-4 py-3 font-body text-ink outline-none focus:border-ink";
+export const metadata: Metadata = { title: "Sign in — MADE.line admin" };
 
-function LoginForm() {
-  const next = useSearchParams().get("next") ?? "";
-  const [state, action, pending] = useActionState<LoginState, FormData>(login, {});
-
+export default async function Login() {
+  const dark = await isDarkTheme();
   return (
-    <form action={action} className="mt-10 space-y-4">
-      <input type="hidden" name="next" value={next} />
-      <label className="block font-body text-sm text-ink/70" htmlFor="username">
-        Username
-      </label>
-      <input
-        className={field}
-        id="username"
-        name="username"
-        autoComplete="username"
-        required
-        autoFocus
-      />
+    <div
+      className={`admin-theme grid min-h-screen bg-white font-body text-ink lg:grid-cols-2 ${dark ? "dark" : ""}`}
+    >
+      <main className="flex items-center justify-center px-6 py-16">
+        <div className="w-full max-w-md">
+          <Wordmark className="h-8 dark:brightness-0 dark:invert" priority />
+          <h1 className="mt-12 text-4xl font-bold">Sign In</h1>
+          <p className="mt-2 text-ink/60">Enter your username and password to sign in.</p>
+          {/* useSearchParams needs a Suspense boundary to prerender this route. */}
+          <Suspense>
+            <LoginForm />
+          </Suspense>
+        </div>
+      </main>
 
-      <label
-        className="block pt-2 font-body text-sm text-ink/70"
-        htmlFor="password"
+      {/* Brand panel. A fixed brown, not the ink token, which turns light in
+          dark mode. The faint grid is two repeating gradients. */}
+      <aside
+        aria-hidden
+        className="relative hidden place-items-center overflow-hidden bg-[#4a2313] lg:grid"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgb(247 240 225 / 0.07) 1px, transparent 1px), linear-gradient(90deg, rgb(247 240 225 / 0.07) 1px, transparent 1px)",
+          backgroundSize: "72px 72px",
+          backgroundPosition: "center",
+        }}
       >
-        Password
-      </label>
-      <input
-        className={field}
-        id="password"
-        name="password"
-        type="password"
-        autoComplete="current-password"
-        required
+        <div className="grid size-80 place-items-center rounded-full bg-[#f0dd9a]">
+          <Monogram className="h-28" />
+        </div>
+      </aside>
+
+      <ThemeToggle
+        initialDark={dark}
+        className="fixed bottom-6 right-6 size-14 border-0 bg-butter shadow-lg"
       />
-
-      {state.error && (
-        <p
-          role="alert"
-          className="rounded-lg bg-white px-4 py-3 font-body text-sm font-bold text-red-700"
-        >
-          {state.error}
-        </p>
-      )}
-
-      <button
-        className="mt-2 w-full rounded-full border-2 border-ink bg-ink py-3.5 font-display uppercase tracking-[0.12em] text-cream disabled:opacity-50"
-        type="submit"
-        disabled={pending}
-      >
-        {pending ? "Signing in…" : "Sign in"}
-      </button>
-    </form>
-  );
-}
-
-export default function Login() {
-  return (
-    <main className="mx-auto w-full max-w-[400px] px-6 py-20">
-      <Wordmark className="mx-auto h-8" />
-      <h1 className="mt-8 text-center font-display text-2xl uppercase">
-        Admin
-      </h1>
-      {/* useSearchParams needs a Suspense boundary to prerender this route. */}
-      <Suspense>
-        <LoginForm />
-      </Suspense>
-    </main>
+    </div>
   );
 }

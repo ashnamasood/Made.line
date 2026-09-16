@@ -94,7 +94,7 @@ export default async function Messages({
                       </a>
                     </p>
                     {/* pre-wrap keeps the customer's own line breaks. */}
-                    <p className="mt-4 whitespace-pre-wrap break-words rounded-lg bg-[#faf8f3] p-4">
+                    <p className="mt-4 whitespace-pre-wrap break-words rounded-lg bg-canvas p-4">
                       {m.details}
                     </p>
                     {m.attachments && (

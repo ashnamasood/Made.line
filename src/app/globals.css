@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* dark: follows a .dark class (the admin's theme toggle), not the OS setting.
+   The storefront has no dark styles. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-ink: #4a2313;
   --color-cream: #f7f0e1;
@@ -7,6 +11,12 @@
   --color-peri: #b0c7f2;
   --color-pink: #f2a8c4;
   --color-butter: #f0dd9a;
+
+  /* Admin panel only: page background and chart marks. The chart blue is a
+     deeper step of peri — #b0c7f2 is 1.66:1 on white, too faint for a mark. */
+  --color-canvas: #faf8f3;
+  --color-mark: #5a7bd0;
+  --color-mark-hover: #4d6fc4;
 
   --font-display: var(--font-tt-commons), sans-serif;
   --font-script: var(--font-catchye), serif;
@@ -25,4 +35,30 @@ body {
   background: #fff;
   color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+/* Admin dark theme. Every admin colour comes from these theme variables, so
+   remapping them inside the admin wrapper recolours the whole panel. Ink and
+   cream swap roles (light text, dark buttons' text); the accents drop to dark
+   steps that keep light text readable. Checked: body text 12.9:1 and chart
+   marks 5.8:1 on the card colour. */
+.admin-theme.dark {
+  color-scheme: dark;
+  --color-ink: #efe6dc;
+  --color-cream: #17181d;
+  --color-white: #202229;
+  --color-canvas: #17181d;
+  --color-butter: #4a4226;
+  --color-peri: #3b4d78;
+  --color-pink: #7a3a55;
+  --color-blush: #4a3336;
+  --color-mark: #7d9be3;
+  --color-mark-hover: #9ab2ec;
+  --color-red-50: #3a1f22;
+  --color-red-100: #4a2427;
+  --color-red-700: #f19a9a;
+  --color-red-800: #f5b3b3;
+  --color-green-50: #1f3a2b;
+  --color-green-100: #1f3a2b;
+  --color-green-800: #8fd6a8;
 }

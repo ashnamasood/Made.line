@@ -13,13 +13,46 @@ export const PRODUCTS = {
 export type ProductId = keyof typeof PRODUCTS;
 export const PRODUCT_IDS = Object.keys(PRODUCTS) as ProductId[];
 
-export type ProductInfo = { title: string; price: number; active: boolean };
+export type ProductInfo = {
+  title: string;
+  /** Cents, before any discount. */
+  price: number;
+  active: boolean;
+  /** Whole percent off, 0–90. */
+  discount: number;
+  /** Replaces the designed copy on the shop page when set. */
+  description: string | null;
+  /** Packshot for the product row, cart and checkout; null keeps the original. */
+  image: string | null;
+  /** Photo beside the product on the shop page; null keeps the original. */
+  shopImage: string | null;
+};
 /** The live catalogue: every product, with any admin edits applied. */
 export type Catalog = Record<ProductId, ProductInfo>;
 
 export const DEFAULT_CATALOG = Object.fromEntries(
-  PRODUCT_IDS.map((id) => [id, { ...PRODUCTS[id], active: true }]),
+  PRODUCT_IDS.map((id) => [
+    id,
+    {
+      ...PRODUCTS[id],
+      active: true,
+      discount: 0,
+      description: null,
+      image: null,
+      shopImage: null,
+    },
+  ]),
 ) as Catalog;
+
+export const MAX_DISCOUNT = 90;
+
+/** What the customer pays per unit, in cents. */
+export const salePrice = (p: Pick<ProductInfo, "price" | "discount">) =>
+  Math.round((p.price * (100 - p.discount)) / 100);
+
+export const packshot = (id: ProductId, p: ProductInfo) => p.image ?? `/products/${id}.jpg`;
+export const shopPhoto = (id: ProductId, p: ProductInfo) =>
+  p.shopImage ?? `/images/shop-${id}.jpg`;
 
 // hasOwn, not `in`: `in` also matches inherited keys like "toString".
 export const isProductId = (v: unknown): v is ProductId =>

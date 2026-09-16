@@ -2,12 +2,9 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import {
-  SESSION_COOKIE,
-  SESSION_DAYS,
-  createSession,
-  credentialsMatch,
-} from "@/lib/auth";
+import { verifyLogin } from "@/lib/account";
+import { SESSION_COOKIE } from "@/lib/auth";
+import { startSession } from "../requireAdmin";
 
 export type LoginState = { error?: string };
 
@@ -15,26 +12,26 @@ export async function login(
   _prev: LoginState,
   formData: FormData,
 ): Promise<LoginState> {
-  const secret = process.env.ADMIN_PASSWORD;
-  if (!process.env.ADMIN_USER || !secret) {
+  if (!process.env.ADMIN_USER || !process.env.ADMIN_PASSWORD) {
     return { error: "Admin access is not configured on the server." };
   }
 
   const user = String(formData.get("username") ?? "");
   const password = String(formData.get("password") ?? "");
-  if (!credentialsMatch(user, password)) {
+  let ok: boolean;
+  try {
+    ok = await verifyLogin(user, password);
+  } catch (error) {
+    console.error("login check failed", error);
+    return { error: "Can't sign in right now: the database isn't responding." };
+  }
+  if (!ok) {
     // Deliberately vague: naming the wrong field tells an attacker which
     // half they already have.
     return { error: "Incorrect username or password." };
   }
 
-  (await cookies()).set(SESSION_COOKIE, await createSession(secret), {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: SESSION_DAYS * 86_400,
-  });
+  await startSession();
 
   // Only ever an internal path — an open redirect here would let a crafted
   // login link bounce the admin to another site after signing in.

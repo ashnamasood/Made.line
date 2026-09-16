@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { AddToCart } from "@/components/AddToCart";
 import { ProductRow } from "@/components/ProductRow";
-import type { ProductId } from "@/lib/products";
+import { getCatalog } from "@/lib/catalog";
+import { money, salePrice, shopPhoto, type ProductId } from "@/lib/products";
 
 /**
  * Sizes are percentages of the design page's width, read from the PDF's own
@@ -19,10 +20,24 @@ import type { ProductId } from "@/lib/products";
  * rendered width; all stay on one line (the longest wraps above ~4.3vw).
  */
 
-const items = [
+const items: {
+  name: ProductId;
+  accent: string;
+  body: string;
+  made: string;
+  script: string;
+  sub: string;
+  cart: string;
+  tag: string;
+  aspect: string;
+  size: [number, number];
+  reverse?: boolean;
+  lines: string[];
+  tagline: string;
+  alt: string;
+}[] = [
   {
     name: "slick",
-    title: "Flyaway Balm Stick",
     accent: "bg-[#fdbdd9]",
     body: "md:text-[clamp(0px,1.26vw,19px)]",
     made: "md:text-[clamp(0px,5.37vw,81.1px)]",
@@ -45,7 +60,6 @@ const items = [
   },
   {
     name: "fresh",
-    title: "Dry Shampoo",
     accent: "bg-[#faecb0]",
     body: "md:text-[clamp(0px,1.37vw,20.7px)]",
     made: "md:text-[clamp(0px,5.46vw,82.6px)]",
@@ -70,7 +84,6 @@ const items = [
   },
   {
     name: "even",
-    title: "Grey Coverage Stick",
     accent: "bg-[#a8c7f1]",
     body: "md:text-[clamp(0px,1.34vw,20.2px)]",
     made: "md:text-[clamp(0px,5.33vw,80.5px)]",
@@ -94,7 +107,10 @@ const items = [
   },
 ];
 
-export default function Shop() {
+export default async function Shop() {
+  // Name, description, photo and stock are editable in the admin; the rest
+  // of each block is the fixed design.
+  const catalog = await getCatalog();
   return (
     <div data-bg="cream">
       {/* Hero */}
@@ -117,7 +133,9 @@ export default function Shop() {
 
       <ProductRow />
 
-      {items.map((item) => (
+      {items.map((item) => {
+        const info = catalog[item.name];
+        return (
         <section
           key={item.name}
           id={item.name}
@@ -149,12 +167,14 @@ export default function Shop() {
               <p
                 className={`mt-2 font-body text-xl font-bold [-webkit-text-stroke:0.35px_var(--color-ink)] md:mt-[clamp(0px,0.75vw,11.3px)] ${item.sub}`}
               >
-                {item.title}
+                {info.title}
               </p>
               <p
-                className={`mt-6 font-body font-medium leading-[1.35] max-md:text-base md:mt-[clamp(0px,1.83vw,27.7px)] ${item.body}`}
+                className={`mt-6 font-body font-medium leading-[1.35] max-md:text-base md:mt-[clamp(0px,1.83vw,27.7px)] ${item.body} ${info.description ? "whitespace-pre-line" : ""}`}
               >
-                {item.lines.map((line, i) => (
+                {/* An admin description wraps normally; the designed copy keeps
+                    its hand-set line breaks. */}
+                {info.description ?? item.lines.map((line, i) => (
                   <span key={line}>
                     {line}
                     {i < item.lines.length - 1 && (
@@ -176,15 +196,21 @@ export default function Shop() {
               </p>
               {/* The design sets this in the display face, not Archivo, and
                   spaces the letters in the text itself rather than by tracking. */}
+              {info.discount > 0 && (
+                <p className="mt-4 font-body text-lg font-bold">
+                  {info.discount}% off · {money(salePrice(info))}{" "}
+                  <s className="font-medium text-ink/60">{money(info.price)}</s>
+                </p>
+              )}
               <AddToCart
-                product={item.name as ProductId}
+                product={item.name}
                 className={`mt-[clamp(0px,2.42vw,36.6px)] w-full rounded-full border-2 border-ink py-4 font-display [-webkit-text-stroke:0.4px_var(--color-ink)] uppercase tracking-[0.12em] md:border-4 md:py-[clamp(0px,0.95vw,14.5px)] ${item.cart} ${item.accent}`}
               />
             </div>
           </div>
 
           <Image
-            src={`/images/shop-${item.name}.jpg`}
+            src={shopPhoto(item.name, info)}
             alt={item.alt}
             width={item.size[0]}
             height={item.size[1]}
@@ -199,7 +225,8 @@ export default function Shop() {
             } ${item.aspect}`}
           />
         </section>
-      ))}
+        );
+      })}
     </div>
   );
 }

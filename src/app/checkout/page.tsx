@@ -3,9 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { LinePrice } from "@/components/LinePrice";
 import { useCart } from "@/components/CartProvider";
 import { Wordmark } from "@/components/Logo";
-import { money } from "@/lib/products";
+import { money, packshot } from "@/lib/products";
 
 const field =
   "w-full rounded-lg border border-ink/30 bg-white px-4 py-3 font-body text-ink outline-none focus:border-ink";
@@ -157,7 +158,7 @@ export default function Checkout() {
           <div key={line.id} className="flex items-center gap-4 py-4">
             <div className="relative flex-none">
               <Image
-                src={`/products/${line.id}.jpg`}
+                src={packshot(line.id, catalog[line.id])}
                 alt=""
                 width={706}
                 height={941}
@@ -177,7 +178,7 @@ export default function Checkout() {
               )}
             </div>
             <span className="font-body font-bold">
-              {money(catalog[line.id].price * line.qty)}
+              <LinePrice info={catalog[line.id]} qty={line.qty} />
             </span>
           </div>
         ))}

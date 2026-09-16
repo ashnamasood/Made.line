@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { readCatalog } from "@/lib/catalog";
-import { PRODUCT_IDS, money } from "@/lib/products";
+import { PRODUCT_IDS, money, packshot, salePrice } from "@/lib/products";
 import { Card, DbProblem, PageHeader, loadFromDb, pill } from "../ui";
 
 export const dynamic = "force-dynamic";
@@ -38,7 +38,7 @@ export default async function Products() {
                       <td className="px-5 py-4 md:px-7">
                         <div className="flex items-center gap-4">
                           <Image
-                            src={`/images/shop-${id}.jpg`}
+                            src={packshot(id, p)}
                             alt=""
                             width={56}
                             height={56}
@@ -50,7 +50,14 @@ export default async function Products() {
                           </div>
                         </div>
                       </td>
-                      <td className="px-3 py-4 font-bold">{money(p.price)}</td>
+                      <td className="px-3 py-4">
+                        <span className="font-bold">{money(salePrice(p))}</span>
+                        {p.discount > 0 && (
+                          <span className="block text-sm text-ink/50">
+                            <s>{money(p.price)}</s> · {p.discount}% off
+                          </span>
+                        )}
+                      </td>
                       <td className="hidden px-3 py-4 sm:table-cell">
                         <span
                           className={`${pill} ${

@@ -123,7 +123,7 @@ export default async function Orders({
                       </p>
                     </div>
 
-                    <div className="rounded-lg bg-[#faf8f3] p-4 text-sm">
+                    <div className="rounded-lg bg-canvas p-4 text-sm">
                       <p className="font-bold">
                         {o.first_name} {o.last_name}
                       </p>

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { sessionSecret } from "@/lib/account";
 import { SESSION_COOKIE, isValidSession } from "@/lib/auth";
 
 // ponytail: one signed cookie, no session store and no auth provider — there
@@ -10,8 +11,14 @@ export async function proxy(request: NextRequest) {
   // The login page has to stay reachable, or signing in is impossible.
   if (pathname === "/admin/login") return NextResponse.next();
 
-  const secret = process.env.ADMIN_PASSWORD;
-  if (!process.env.ADMIN_USER || !secret) {
+  let secret: string | null;
+  try {
+    secret = await sessionSecret();
+  } catch (error) {
+    console.error("admin session check failed", error);
+    return new NextResponse("The admin can't reach its database right now.", { status: 503 });
+  }
+  if (!secret) {
     return new NextResponse("Admin access is not configured.", { status: 503 });
   }
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { blobConfigured } from "@/lib/blob";
 import { readCatalog } from "@/lib/catalog";
 import { isProductId } from "@/lib/products";
 import { Card, DbProblem, PageHeader, loadFromDb } from "../../ui";
@@ -25,21 +25,8 @@ export default async function EditProduct({ params }: { params: Promise<{ id: st
           <Link href="/admin/products" className="text-ink/60 hover:text-ink">
             ← Back to products
           </Link>
-          <div className="mt-6 flex items-center gap-4">
-            <Image
-              src={`/images/shop-${id}.jpg`}
-              alt=""
-              width={96}
-              height={96}
-              className="size-24 rounded-xl object-cover"
-            />
-            <p className="text-sm text-ink/60">
-              Photos and the shop page copy are part of the site design, so they
-              change through a developer.
-            </p>
-          </div>
           <div className="mt-8">
-            <ProductForm id={id} info={data.value[id]} />
+            <ProductForm id={id} info={data.value[id]} blobReady={blobConfigured()} />
           </div>
         </Card>
       )}

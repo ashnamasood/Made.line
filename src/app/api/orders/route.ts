@@ -2,7 +2,7 @@ import { readCatalog } from "@/lib/catalog";
 import { db } from "@/lib/db";
 import { sendAdminEmail } from "@/lib/email";
 import { ensureOrdersSchema } from "@/lib/orders";
-import { isProductId, money, type ProductId } from "@/lib/products";
+import { isProductId, money, salePrice, type ProductId } from "@/lib/products";
 
 const FIELDS = {
   email: { max: 320, required: true },
@@ -90,7 +90,7 @@ export async function POST(request: Request) {
     id: l.id,
     qty: l.qty,
     title: catalog[l.id].title,
-    unit_price: catalog[l.id].price,
+    unit_price: salePrice(catalog[l.id]),
   }));
   const subtotal = items.reduce((n, i) => n + i.unit_price * i.qty, 0);
 

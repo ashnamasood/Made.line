@@ -3,29 +3,44 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Monogram, Wordmark } from "@/components/Logo";
+import { Wordmark } from "@/components/Logo";
+import type { Account } from "@/lib/account";
+import { Avatar } from "../_shared/Avatar";
+import { Icon, type IconName } from "../_shared/Icon";
+import { ThemeToggle } from "../_shared/ThemeToggle";
 import { logout } from "../login/actions";
-import { Icon, type IconName } from "./Icon";
 
 const menu: [href: string, label: string, icon: IconName][] = [
   ["/admin", "Dashboard", "dashboard"],
   ["/admin/orders", "Orders", "orders"],
   ["/admin/messages", "Contact Form", "messages"],
   ["/admin/products", "Products", "products"],
+  ["/admin/settings", "Settings", "settings"],
 ];
 
-/** Sidebar + top bar around every panel page. Client-side only for the active link and the phone menu. */
-export function Chrome({ user, children }: { user: string; children: React.ReactNode }) {
+/**
+ * Sidebar + top bar around every panel page. Client-side only for the active
+ * link and the phone menu. `admin-theme` scopes the dark palette in globals.css.
+ */
+export function Chrome({
+  account,
+  dark,
+  children,
+}: {
+  account: Account;
+  dark: boolean;
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#faf8f3] font-body text-ink">
+    <div className={`admin-theme min-h-screen bg-canvas font-body text-ink ${dark ? "dark" : ""}`}>
       {/* Phones get the sidebar as a drawer over a dimmed page. */}
       {open && (
         <button
           aria-label="Close menu"
-          className="fixed inset-0 z-30 bg-ink/30 lg:hidden"
+          className="fixed inset-0 z-30 bg-black/40 lg:hidden"
           onClick={() => setOpen(false)}
         />
       )}
@@ -37,7 +52,7 @@ export function Chrome({ user, children }: { user: string; children: React.React
       >
         <div className="flex items-center justify-between px-2">
           <Link href="/admin" onClick={() => setOpen(false)}>
-            <Wordmark className="h-7" />
+            <Wordmark className="h-7 dark:brightness-0 dark:invert" />
           </Link>
           <button
             aria-label="Close menu"
@@ -72,7 +87,7 @@ export function Chrome({ user, children }: { user: string; children: React.React
       </aside>
 
       <div className="lg:pl-72">
-        <header className="sticky top-0 z-20 flex items-center justify-between border-b border-ink/10 bg-white px-4 py-3 md:px-8">
+        <header className="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-ink/10 bg-white px-4 py-3 md:px-8">
           <button
             aria-label="Open menu"
             className="rounded-xl border border-ink/15 p-2.5 lg:invisible"
@@ -81,26 +96,35 @@ export function Chrome({ user, children }: { user: string; children: React.React
             <Icon name="menu" />
           </button>
 
-          <details className="relative">
-            <summary className="flex cursor-pointer list-none items-center gap-3">
-              <span className="grid size-11 place-items-center rounded-full bg-butter/60">
-                <Monogram className="h-4" />
-              </span>
-              <span className="hidden font-bold sm:inline">{user}</span>
-              <Icon name="chevron" className="size-4" />
-            </summary>
-            <form
-              action={logout}
-              className="absolute right-0 mt-2 w-44 rounded-xl border border-ink/10 bg-white p-2 shadow-lg"
-            >
-              <button
-                type="submit"
-                className="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-ink/5"
-              >
-                Sign out
-              </button>
-            </form>
-          </details>
+          <div className="flex items-center gap-3">
+            <ThemeToggle initialDark={dark} />
+            <details className="relative">
+              <summary className="flex cursor-pointer list-none items-center gap-3 rounded-full py-1 pl-1 pr-2 hover:bg-ink/5">
+                <Avatar src={account.avatar} className="size-11" />
+                <span className="hidden max-w-48 truncate font-bold sm:inline">{account.name}</span>
+                <Icon name="chevron" className="size-4" />
+              </summary>
+              <div className="absolute right-0 mt-2 w-56 rounded-xl border border-ink/10 bg-white p-2 shadow-lg">
+                <p className="truncate px-3 pb-2 pt-1 text-sm text-ink/50">@{account.username}</p>
+                <Link
+                  href="/admin/settings"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm hover:bg-ink/5"
+                >
+                  <Icon name="settings" className="size-4" />
+                  Profile settings
+                </Link>
+                <form action={logout}>
+                  <button
+                    type="submit"
+                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm hover:bg-ink/5"
+                  >
+                    <Icon name="logout" className="size-4" />
+                    Sign out
+                  </button>
+                </form>
+              </div>
+            </details>
+          </div>
         </header>
 
         <main className="mx-auto max-w-6xl space-y-6 px-4 py-8 md:px-8">{children}</main>

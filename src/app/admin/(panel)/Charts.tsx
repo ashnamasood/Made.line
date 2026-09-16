@@ -1,9 +1,9 @@
 import { money } from "@/lib/products";
 
 // Plain HTML/CSS rather than SVG, so labels stay a readable size at any card
-// width. Marks use a deeper step of the brand periwinkle: #b0c7f2 is 1.66:1 on
-// white, too faint for a mark; #5a7bd0 is 4.06:1, and hover goes one step
-// darker to #4d6fc4. Text always stays in ink, never the mark colour.
+// width. Marks use the mark / mark-hover theme colours (see globals.css, which
+// also holds the dark-mode steps). Text always stays in ink, never the mark
+// colour.
 
 /** A clean axis ceiling split into 4 steps of 1, 2, 2.5 or 5 × 10ⁿ. */
 function niceScale(max: number, fallback: number) {
@@ -77,7 +77,7 @@ export function RevenueChart({
               <div
                 key={t}
                 aria-hidden
-                className="absolute inset-x-0 border-t border-[#ece8e1]"
+                className="absolute inset-x-0 border-t border-ink/10"
                 style={{ bottom: pct(t) }}
               />
             ))}
@@ -100,12 +100,12 @@ export function RevenueChart({
                   {d.revenue > 0 && (
                     // 1px padding each side leaves a 2px gap between touching bars.
                     <div
-                      className="w-full max-w-6 rounded-t-[4px] bg-[#5a7bd0] group-hover:bg-[#4d6fc4] group-focus-visible:bg-[#4d6fc4]"
+                      className="w-full max-w-6 rounded-t-[4px] bg-mark group-hover:bg-mark-hover group-focus-visible:bg-mark-hover"
                       style={{ height: pct(d.revenue) }}
                     />
                   )}
                   <div
-                    className={`pointer-events-none absolute bottom-full z-10 mb-2 hidden whitespace-nowrap rounded-lg border border-[#ece8e1] bg-white px-3 py-2 text-xs shadow-sm group-hover:block group-focus-visible:block ${edge(i, n, 4)}`}
+                    className={`pointer-events-none absolute bottom-full z-10 mb-2 hidden whitespace-nowrap rounded-lg border border-ink/10 bg-white px-3 py-2 text-xs shadow-sm group-hover:block group-focus-visible:block ${edge(i, n, 4)}`}
                   >
                     <span className="block text-ink/60">{shortDay(d.day)}</span>
                     <span className="block font-bold">
@@ -175,10 +175,10 @@ export function UnitsChart({ rows }: { rows: { label: string; units: number }[] 
               <span className="font-bold tabular-nums">{r.units}</span>
             </div>
             {/* Recessive track, so a zero still reads as a row rather than a gap. */}
-            <div aria-hidden className="mt-2 h-5 rounded-[4px] bg-[#ece8e1]/60">
+            <div aria-hidden className="mt-2 h-5 rounded-[4px] bg-ink/[0.07]">
               {r.units > 0 && (
                 <div
-                  className="h-full rounded-r-[4px] bg-[#5a7bd0] group-hover:bg-[#4d6fc4]"
+                  className="h-full rounded-r-[4px] bg-mark group-hover:bg-mark-hover"
                   style={{ width: `${(r.units / max) * 100}%` }}
                 />
               )}
