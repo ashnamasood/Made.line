@@ -98,3 +98,10 @@ export async function setOrderStatus(id: number, status: Status) {
   await ensureOrdersSchema();
   await db()`UPDATE orders SET status = ${status} WHERE id = ${id}`;
 }
+
+export async function recentOrders(limit: number) {
+  await ensureOrdersSchema();
+  const rows = await db()`
+    SELECT * FROM orders ORDER BY created_at DESC LIMIT ${limit}`;
+  return rows as Order[];
+}

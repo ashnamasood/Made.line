@@ -1,3 +1,4 @@
+import { ensureContactSchema } from "@/lib/contact";
 import { db } from "@/lib/db";
 
 const LIMITS = {
@@ -6,31 +7,6 @@ const LIMITS = {
   reason: 100,
   details: 5000,
 } as const;
-
-// ponytail: DDL on cold start instead of a migration tool — one table, one app.
-// Move to migrations if a second table shows up.
-let ready: Promise<unknown> | null = null;
-function ensureTable() {
-  const sql = db();
-  ready ??= (async () => {
-    await sql`
-      CREATE TABLE IF NOT EXISTS contact_messages (
-        id         bigserial PRIMARY KEY,
-        name       text        NOT NULL,
-        email      text        NOT NULL,
-        reason     text        NOT NULL,
-        topic      text,
-        details    text        NOT NULL,
-        attachments text,
-        created_at timestamptz NOT NULL DEFAULT now()
-      )`;
-    // The design dropped the Topic field. CREATE TABLE IF NOT EXISTS won't
-    // touch a table that already exists, so a database created before this
-    // still has topic NOT NULL and every insert would fail on it.
-    await sql`ALTER TABLE contact_messages ALTER COLUMN topic DROP NOT NULL`;
-  })();
-  return ready;
-}
 
 /** Trims, rejects empties, and caps length so a huge body can't reach the DB. */
 function clean(body: Record<string, unknown>) {
@@ -72,7 +48,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    await ensureTable();
+    await ensureContactSchema();
     await db()`
       INSERT INTO contact_messages (name, email, reason, details, attachments)
       VALUES (${result.name}, ${result.email}, ${result.reason},
